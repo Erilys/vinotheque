@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  year: 1
+  xl_id: MyString
+  comment: MyText
+  ticket: MyString
+  aged: MyString
+  color: 1
+  variety: MyString
+  volume: 1
+  titration: 1.5
+  organic: false
+  note: 1
+  bottling: MyString
+
+two:
+  name: MyString
+  year: 1
+  xl_id: MyString
+  comment: MyText
+  ticket: MyString
+  aged: MyString
+  color: 1
+  variety: MyString
+  volume: 1
+  titration: 1.5
+  organic: false
+  note: 1
+  bottling: MyString

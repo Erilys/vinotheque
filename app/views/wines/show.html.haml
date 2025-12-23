@@ -1,0 +1,8 @@
+= content_for :title, t('.title_tab')
+
+%h1= t('.title')
+
+= link_to t('.edit'), edit_wine_path(@wine), class: "daisy-btn daisy-btn"
+= button_to t('.destroy'), @wine, method: :delete, class: "daisy-btn daisy-btn daisy-btn-warning ", data: { turbo_confirm: "Are you sure?" }
+
+= link_to "Back to wines", wines_path, class: "daisy-btn"

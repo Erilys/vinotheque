@@ -1,0 +1,8 @@
+= content_for :title, t('.title_tab')
+
+.w-full
+  %h1= t('.title')
+
+  = render "form", wine: @wine
+
+  = link_to "Back to wines", wines_path, class: "daisy-btn"

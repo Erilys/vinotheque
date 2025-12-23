@@ -1,0 +1,30 @@
+---
+fr:
+  activerecord:
+    attributes:
+      wine:
+        aged: Élevage
+        bottling: Embouteillage
+        color: Couleur
+        colors:
+          pink: Rosé
+          red: Rouge
+          white: Blanc
+        comment: Commentaire
+        name: Nom
+        note: Note
+        organic: Biologique
+        ticket: Ticket
+        titration: Titrage
+        year: Année
+        variety: Variété
+        volume: Volume
+        xl_key: Clé excel
+    errors:
+      models:
+        wine:
+          # attributes:
+          #   old_password_confirmation:
+          #     old_password_invalid: ne correspond pas à l'ancien mot de passe
+    models:
+      wines: Vins

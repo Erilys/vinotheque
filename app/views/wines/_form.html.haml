@@ -1,0 +1,27 @@
+= simple_form_for wine do |f|
+  - if wine.errors.any?
+    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-md.mt-3
+      %h2= "#{pluralize(wine.errors.count, "error")} prohibited this wine from being saved:"
+      %ul.list-disc.ml-6
+        - wine.errors.each do |error|
+          = error.full_message
+
+  .columns-3
+    = f.input :xl_id
+    = f.input :name
+    = f.input :year
+  = f.input :organic, input_html: { class: 'daisy-toggle-success' }
+
+  = f.input :comment
+  .columns-4
+    = f.input :color, as: :select, collection: Wine.colors.keys, selected: wine.color
+    = f.input :ticket
+    = f.input :aged
+    = f.input :variety
+  .columns-4
+    = f.input :volume
+    = f.input :titration
+    = f.input :bottling
+    = f.input :note
+
+  = f.button :submit, 'Enregistrer', class: 'daisy-btn daisy-btn-primary'

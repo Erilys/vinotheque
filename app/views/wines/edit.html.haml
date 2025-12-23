@@ -1,0 +1,10 @@
+= content_for :title, t('.title_tab')
+
+.w-full
+  %h1= t('.title')
+
+  = render "form", wine: @wine
+
+  .mt-4.text-end
+    = link_to t('.go_to_show'), @wine, class: "daisy-btn"
+    = link_to t('.go_to_index'), wines_path, class: "daisy-btn"

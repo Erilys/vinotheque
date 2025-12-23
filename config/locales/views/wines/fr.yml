@@ -1,0 +1,15 @@
+---
+fr:
+  wines:
+    edit:
+      title: Modifier un vin
+      go_to_show: Retourner au vin
+      go_to_index: Retourner à la vinothèque
+    index:
+      actions: Actions
+      edit: Modifier
+      new: Ajouter un vin
+      show: Voir
+      title: Tous les vins
+    new:
+      title: Nouveau vin

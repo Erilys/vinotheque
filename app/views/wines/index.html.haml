@@ -1,0 +1,50 @@
+.w-full
+  - if notice.present?
+    %p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-md.inline-block{ id: :notice }
+      = notice
+
+  %div.flex.justify-between.items-center
+    %h1.font-bold.text-4xl= t('.title')
+    = link_to t('.new'), new_wine_path, class: "daisy-btn daisy-btn-primary"
+
+  %div#wines.min-w-full.divide-y.divide-gray-200.space-y-5
+    - if @wines.any?
+      .overflow-x-auto
+        %table.daisy-table.daisy-table-zebra.daisy-table-pin-cols.daisy-table-pin-rows
+          %thead
+            %tr
+              %td= t('.actions')
+              %td= Wine.human_attribute_name(:xl_key)
+              %th= Wine.human_attribute_name(:name)
+              %td= Wine.human_attribute_name(:year)
+              %td= Wine.human_attribute_name(:comment)
+              %td= Wine.human_attribute_name(:ticket)
+              %td= Wine.human_attribute_name(:aged)
+              %td= Wine.human_attribute_name(:color)
+              %td= Wine.human_attribute_name(:variety)
+              %td= Wine.human_attribute_name(:volume)
+              %td= Wine.human_attribute_name(:titration)
+              %td= Wine.human_attribute_name(:organic)
+              %td= Wine.human_attribute_name(:note)
+              %td= Wine.human_attribute_name(:bottling)
+          %tbody
+            - 10.times do
+              - @wines.each do |wine|
+                %tr{ id: dom_id(wine) }
+                  %td
+                    %div{ class:"w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2" }
+                      = link_to t('.show'), wine, class: "daisy-btn daisy-btn-primary daisy-btn-sm"
+                      = link_to t('.edit'), edit_wine_path(wine), class: "daisy-btn daisy-btn-sm"
+                  %td.font-bold= wine.xl_id
+                  %th.min-w-80= wine.name
+                  %td= wine.year
+                  %td= wine.comment
+                  %td= wine.ticket
+                  %td= wine.aged
+                  %td= enum_i18n(Wine, :color, wine.color)
+                  %td= wine.variety
+                  %td= wine.volume
+                  %td= wine.titration
+                  %td= t(wine.organic)
+                  %td= wine.note
+                  %td= wine.bottling

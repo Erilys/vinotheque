@@ -8,3 +8,11 @@
 @plugin "./daisyui-theme.mjs"{
   /* custom theme here */
 }
+
+@plugin "daisyui" {
+  prefix: "daisy-";
+}
+
+h1 { font-size: 2rem;   font-weight: bold; }
+h2 { font-size: 1.8rem; font-weight: semibold; }
+h2 { font-size: 1.6rem; font-weight: semibold; }
