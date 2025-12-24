@@ -1,0 +1,8 @@
+---
+  fr:
+    layouts:
+      navbar:
+        all_entries: Toutes les entrées
+        all_wines: Tous les vins
+        new_entry: Ajouter une entrée
+        new_wine: Ajouter un vin

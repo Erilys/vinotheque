@@ -1,0 +1,10 @@
+.w-full.text-end.px-8
+  .flex.justify-end.gap-6
+    .flex.justify-end.gap-1
+      = link_to t('.all_wines'), wines_path, class: "daisy-btn daisy-btn-primary"
+      = link_to new_wine_path, class: "daisy-btn daisy-btn-primary" do
+        %i.fa-solid.fa-plus
+    .flex.justify-end.gap-1
+      = link_to t('.all_entries'), entries_path, class: "daisy-btn daisy-btn-accent"
+      = link_to new_entry_path, class: "daisy-btn daisy-btn-accent" do
+        %i.fa-solid.fa-plus

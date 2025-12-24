@@ -8,4 +8,6 @@
 
 en:
   false: No
+  go_to_root: Back to wine library
+  submit: Submit
   true: Yes

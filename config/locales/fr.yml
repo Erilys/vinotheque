@@ -1,4 +1,6 @@
 ---
 fr:
   false: Non
+  go_to_root: Retourner à la vinothèque
+  submit: Enregistrer
   true: Oui
