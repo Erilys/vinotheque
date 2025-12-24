@@ -1,0 +1,20 @@
+---
+fr:
+  wines:
+    edit:
+      title: Modifier un vin
+      go_to_show: Retourner au vin
+    index:
+      actions: Actions
+      all_entries: Toutes les entrées
+      edit: Modifier
+      new_entry: Ajouter une entrée
+      new_wine: Ajouter un vin
+      show: Voir
+      stock: Stock
+      title: La vinothèque
+    new:
+      title: Nouveau vin
+    show:
+      destroy: Supprimer
+      edit: Modifier

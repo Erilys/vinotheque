@@ -1,0 +1,33 @@
+= simple_form_for wine do |f|
+  - if wine.errors.any?
+    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-md.mt-3
+      %h2= "#{pluralize(wine.errors.count, "error")} prohibited this wine from being saved:"
+      %ul.list-disc.ml-6
+        - wine.errors.each do |error|
+          = error.full_message
+
+  .w-full.flex.gap-3.mb-3
+    = f.input :xl_id, wrapper_html: { class: 'w-1/4' }
+    = f.input :name, wrapper_html: { class: 'w-1/2' }
+    = f.input :year, wrapper_html: { class: 'w-1/4' }
+
+  .mb-6
+    = f.input :comment, as: :string
+
+  .w-full.flex.gap-3.mb-3
+    = f.input :color, as: :select, collection: Wine.colors.keys, selected: wine.color, wrapper_html: { class: 'w-1/4' }
+    = f.input :ticket, wrapper_html: { class: 'w-1/4' }
+    = f.input :aged, wrapper_html: { class: 'w-1/4' }
+    = f.input :variety, wrapper_html: { class: 'w-1/4' }
+
+  .w-full.flex.gap-3.mb-6
+    = f.input :volume, wrapper_html: { class: 'w-1/4' }
+    = f.input :titration, wrapper_html: { class: 'w-1/4' }
+    = f.input :bottling, wrapper_html: { class: 'w-1/4' }
+    = f.input :note, wrapper_html: { class: 'w-1/4' }
+
+  .mb-9
+    = f.input :organic, input_html: { class: 'daisy-toggle-success' }
+
+  = f.button :submit, t('submit'), class: 'daisy-btn daisy-btn-primary'
+  = link_to t('go_to_root'), wines_path, class: "daisy-btn"

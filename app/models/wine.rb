@@ -9,11 +9,21 @@ class Wine < ApplicationRecord
   # Attr_accessor
 
   # Associations
+  has_many_attached :front_label_pictures
+  has_many_attached :back_label_pictures
+
+  has_many :entries
 
   # Validations
+  normalizes :aged, :bottling, :comment, :name, :titration, :variety, :volume, with: ->(string) { string.strip.presence }
+
   validates :name, :year, presence: true
 
   # Delegation
 
   # Methods
+
+  def name_and_year
+    "#{name} - #{year} "
+  end
 end

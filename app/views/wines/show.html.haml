@@ -1,0 +1,77 @@
+= content_for :title, @wine.name
+
+.w-full
+  .flex.justify-between
+    %h1.text-primary= @wine.name
+
+    .daisy-stats.daisy-shadow
+      .daisy-stat
+        -# .daisy-stat-figure.text-primary
+        -#   = image_tag 'icons/search_icon.svg'
+        .daisy-stat-title= Wine.human_attribute_name(:year)
+        .daisy-stat-value.text-primary= t(@wine.year)
+      .daisy-stat
+        -# .daisy-stat-figure.text-primary
+        -#   = image_tag 'icons/search_icon.svg'
+        .daisy-stat-title= Wine.human_attribute_name(:xl_id)
+        .daisy-stat-value.text-primary= @wine.xl_id
+      .daisy-stat
+        -# .daisy-stat-figure.text-primary
+        -#   = image_tag 'icons/search_icon.svg'
+        .daisy-stat-title= Wine.human_attribute_name(:note)
+        .daisy-stat-value.text-primary= t(@wine.note) || '-'
+        .daisy-stat-desc TODO - moyenne
+
+  .mb-8
+    .mb-1.text-md.font-light= Wine.human_attribute_name(:comment)
+    = @wine.comment || '-'
+
+  .w-full.flex.mb-8
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Wine.human_attribute_name(:color)
+      %span= enum_i18n(Wine, :color, @wine.color)
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Wine.human_attribute_name(:ticket)
+      %span.text-slate-900= @wine.ticket || '-'
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Wine.human_attribute_name(:aged)
+      %span= @wine.aged || '-'
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Wine.human_attribute_name(:variety)
+      %span= @wine.variety || '-'
+
+  .w-full.flex.mb-8
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Wine.human_attribute_name(:volume)
+      %span= @wine.volume || '-'
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Wine.human_attribute_name(:titration)
+      %span= @wine.titration || '-'
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Wine.human_attribute_name(:bottling)
+      %span= @wine.bottling || '-'
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Wine.human_attribute_name(:organic)
+      %span= t(@wine.organic) || '-'
+
+  %div{ class:"grid grid-flow-row-dense xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6",
+    data: { controller: "lightbox" }}
+    %div{ class: "w-[220px] h-[154px]" }
+      - [*@wine.front_label_pictures, *@wine.back_label_pictures].each_with_index do |index, picture|
+        %div{ class: "w-[220px] h-[154px] #{ "col-start-2" if index.zero? } #{"sm:col-span-2 sm:row-span-2 sm:w-auto sm:h-auto" if index.zero? } object-cover farm-pictures cursor-pointer" }
+          -# = cl_image_tag picture[:name],
+          -#   height: 348,
+          -#   width: 468,
+          -#   crop: :fill,
+          -#   alt: picture[:label],
+          -#   class: "rounded-lg",
+          -#   data: {\
+          -#     full_src: cl_image_path(picture[:name]),\
+          -#     action: "click->lightbox#open",\
+          -#     lightbox_target: "img"\
+          -#   }
+
+  %div.flex.gap-3
+    = link_to t('.edit'), edit_wine_path(@wine), class: "daisy-btn daisy-btn"
+    = button_to t('.destroy'), @wine, method: :delete, class: "daisy-btn daisy-btn daisy-btn-warning ", data: { turbo_confirm: "Are you sure?" }
+    = link_to t('go_to_root'), wines_path, class: "daisy-btn"
