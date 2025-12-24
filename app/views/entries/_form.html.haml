@@ -1,0 +1,33 @@
+= content_for :title, t('.title_tab')
+
+.w-full
+  .mb-8.flex.items-end.gap-3
+    = image_tag 'icons/flaticon-wine-box.png', class: 'w-20 h-20'
+    %h1.text-primary= title
+
+  = simple_form_for entry do |f|
+    - if entry.errors.any?
+      #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-md.mt-3
+        %h2= "#{pluralize(entry.errors.count, "error")} prohibited this entry from being saved:"
+        %ul.list-disc.ml-6
+          - entry.errors.each do |error|
+            = error.full_message
+
+    .w-full.flex.gap-3.mb-6
+      = f.input :quantity, wrapper_html: { class: 'w-1/4' }
+      = f.input :wine_id,
+        collection: Wine.order(:name, :year).map{ |wine| [wine.name_and_year, wine.id] },
+        wrapper_html: { class: 'w-1/2' }
+
+    .w-full.flex.items-baseline-last.gap-3.mb-6
+      = f.input :price_per_bottle_in_cents, wrapper_html: { class: 'w-1/4' }
+      = f.input :gift, input_html: { class: 'daisy-toggle-accent' }
+
+    .w-full.flex.gap-3.mb-6
+      = f.input :store, collection: Entry.distinct(:store).order(:store).pluck(:store), wrapper_html: { class: 'w-1/4' }
+      = f.input :store, label: t('.new_store'), input_html: { name: 'entry[new_store]', value: nil }, wrapper_html: { class: 'w-1/4' }
+      = f.input :town, wrapper_html: { class: 'w-1/4' }
+      -# = f.input :purchase_date
+
+    = f.button :submit, t('submit'), class: 'daisy-btn daisy-btn-primary'
+    = link_to t('go_to_root'), wines_path, class: "daisy-btn"

@@ -1,0 +1,30 @@
+-# = content_for :title, @entry.name
+
+.w-full
+  .flex.justify-between
+    %h1.text-primary= "#{@entry.quantity} x #{@entry.wine.name}"
+
+    .daisy-stats.shadow
+      .daisy-stat
+        -# .daisy-stat-figure.text-primary
+        -#   = image_tag 'icons/search_icon.svg'
+        .daisy-stat-title= Entry.human_attribute_name(:purchase_date)
+        .daisy-stat-value.text-primary= @entry.purchase_date
+
+  .w-full.flex.mb-8
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Entry.human_attribute_name(:quantity)
+      %span= @entry.quantity || '-'
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Entry.human_attribute_name(:store)
+      %span= @entry.store || '-'
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Entry.human_attribute_name(:town)
+      %span= @entry.town || '-'
+    %div{ class: 'w-1/4' }
+      .mb-1.text-md.font-light= Entry.human_attribute_name(:price_per_bottle_in_cents)
+      %span= t(@entry.price_per_bottle_in_cents) || '-'
+
+  %div.flex.gap-3
+    = link_to t('.edit'), edit_entry_path(@entry), class: "daisy-btn daisy-btn"
+    = button_to t('.destroy'), @entry, method: :delete, class: "daisy-btn daisy-btn daisy-btn-warning ", data: { turbo_confirm: "Are you sure?" }

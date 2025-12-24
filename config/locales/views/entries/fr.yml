@@ -1,0 +1,19 @@
+---
+fr:
+  entries:
+    edit:
+      go_to_show: Retourner à l'entrée
+      title: Modifier une entrée
+    form:
+      new_store: Nouveau magasin
+    index:
+      actions: Actions
+      edit: Modifier
+      new_entry: Nouvelle entrée
+      show: Voir
+      title: Toutes les entrées
+    new:
+      title: Nouvelle entrée (achat, cadeau...)
+    show:
+      destroy: Supprimer
+      edit: Modifier

@@ -1,0 +1,22 @@
+---
+fr:
+  activerecord:
+    attributes:
+      entry:
+        gift: Cadeau
+        price_per_bottle_in_cents: Prix d'une bouteille en centimes
+        purchase_date: Date d'achat
+        quantity: Quantité
+        store: Magasin
+        town: Ville
+        wine: Vin
+        wine_id: Vin
+    errors:
+      models:
+        entry:
+          # attributes:
+          #   old_password_confirmation:
+          #     old_password_invalid: ne correspond pas à l'ancien mot de passe
+    models:
+      entries: Entrées
+      entry: Entrée
