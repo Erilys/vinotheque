@@ -3,7 +3,11 @@
     %p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-md.inline-block{ id: :notice }
       = notice
 
-  %h1.font-bold.text-4xl.mb-8= t('.title')
+  .mb-8.flex.justify-between.items-end
+    .flex.items-end.gap-3
+      = image_tag 'icons/flaticon-wine.png', class: 'w-20 h-20'
+      %h1.font-bold.text-primary= t('.title')
+    = image_tag 'icons/flaticon-mouse.png', class: 'ml-3 w-10 h-10 rotate-12'
 
   %div#wines.min-w-full.divide-y.divide-gray-200.space-y-5
     - if @wines.any?
@@ -32,7 +36,7 @@
                 %td
                   %div{ class:"w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2" }
                     = link_to t('.show'), wine, class: "daisy-btn daisy-btn-primary daisy-btn-sm"
-                    = link_to t('.edit'), edit_wine_path(wine), class: "daisy-btn daisy-btn-sm"
+                    = link_to t('.edit'), edit_wine_path(wine), class: "daisy-btn daisy-btn-accent daisy-btn-sm"
                 %td.font-bold= wine.xl_id
                 %th.min-w-80= wine.name
                 %td= wine.year

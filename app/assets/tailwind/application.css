@@ -2,9 +2,27 @@
 
 @source not "./daisyui{,*}.mjs";
 
-@plugin "./daisyui.mjs";
+/* @plugin "./daisyui.mjs"; */
 
 /* Optional for custom themes – Docs: https://daisyui.com/docs/themes/#how-to-add-a-new-custom-theme */
-@plugin "./daisyui-theme.mjs"{
+/* @plugin "./daisyui-theme.mjs"{
   /* custom theme here */
+/* } */
+
+@plugin "daisyui" {
+  prefix: "daisy-";
+  themes: autumn --default, dark --prefersdark;
 }
+
+/* Customize default theme here */
+@plugin "daisyui/theme" {
+  name: "autumn";
+  default: true;
+  /* --color-primary: var(--color-red-800); */
+  --color-accent: rgb(236, 195, 72);
+  --radius-field: 0.25rem; /* default is 0.5rem */
+}
+
+h1 { font-size: 2rem;   font-weight: 700; }
+h2 { font-size: 1.8rem; font-weight: 600; }
+h2 { font-size: 1.6rem; font-weight: 600; }

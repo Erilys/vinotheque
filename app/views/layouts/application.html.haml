@@ -24,8 +24,8 @@
 
     = javascript_importmap_tags
 
-  %body
-    = render 'layouts/dark'
+  %body.bg-base-100.my-6
+    -# = render 'layouts/dark' FIXME
     = render 'layouts/navbar'
-    %main{ class:"mx-8 my-8 mb-16 px-5 flex" }
+    %main{ class:"mx-8 mt-4 mb-16 px-5 flex" }
       = yield
