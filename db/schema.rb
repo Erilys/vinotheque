@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_24_143930) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_28_154052) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -55,11 +55,33 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_24_143930) do
     t.index ["wine_id"], name: "index_entries_on_wine_id"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.date "end_date"
+    t.string "name"
+    t.date "start_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_locations_on_name", unique: true
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "location_id"
+    t.integer "quantity"
+    t.bigint "source_id"
+    t.string "source_type"
+    t.datetime "updated_at", null: false
+    t.bigint "wine_id", null: false
+    t.index ["location_id"], name: "index_transactions_on_location_id"
+    t.index ["source_id"], name: "index_transactions_on_source_id"
+    t.index ["wine_id"], name: "index_transactions_on_wine_id"
   end
 
   create_table "wines", force: :cascade do |t|
