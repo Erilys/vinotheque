@@ -10,11 +10,12 @@ fr:
       confirm_destroy_picture: Êtes-vous sûr ? SUPPRESSION DÉFINITIVE
     index:
       actions: Actions
+      add_entry: Achat
       all_entries: Toutes les entrées
       edit: Modifier
       new_entry: Ajouter une entrée
       new_wine: Ajouter un vin
-      show: Voir
+      show: Fiche
       stock: Stock
       title: La vinothèque
     new:

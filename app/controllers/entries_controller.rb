@@ -10,6 +10,7 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
+    @entry.wine_id = params.fetch(:wine_id, nil)
   end
 
   def edit

@@ -35,8 +35,15 @@
               %tr{ id: dom_id(wine) }
                 %td
                   %div{ class:"w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2" }
-                    = link_to t('.show'), wine, class: "daisy-btn daisy-btn-primary daisy-btn-sm"
-                    = link_to t('.edit'), edit_wine_path(wine), class: "daisy-btn daisy-btn-accent daisy-btn-sm"
+                    = link_to wine, class: "daisy-btn daisy-btn-primary daisy-btn-sm", title: t('.show') do
+                      %i.fa-regular.fa-file-lines
+                      = t('.show')
+                    = link_to edit_wine_path(wine), class: "daisy-btn daisy-btn-accent daisy-btn-sm", title: t('.edit') do
+                      %i.fa-regular.fa-edit
+                      = t('.edit')
+                    = link_to new_entry_path(wine_id: wine.id), class: "daisy-btn daisy-btn-accent daisy-btn-sm", title: t('.add_entry') do
+                      %i.fa-solid.fa-basket-shopping
+                      = t('.add_entry')
                 %td.font-bold= wine.xl_id
                 %th.min-w-80= wine.name
                 %td= wine.year
