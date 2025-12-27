@@ -34,12 +34,14 @@ end
 
 Entry.destroy_all
 Wine.find_each do |wine|
-  Entry.create!(
+  entry = Entry.new(
     wine:,
-    quantity: rand(1..12),
     store: Faker::Commerce.brand,
     town: 'Menton',
     price_per_bottle_in_cents: rand(100...100000),
     purchase_date: Faker::Date.backward(days: 365)
   )
+  entry.transactions.build(location: Location.first, quantity: 3)
+  entry.transactions.build(location: Location.last, quantity: 2)
+  entry.save!
 end

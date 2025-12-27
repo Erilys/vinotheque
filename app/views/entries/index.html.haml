@@ -13,7 +13,7 @@
             %td= t('.actions')
             %td= Entry.human_attribute_name(:wine)
             %td= Wine.human_attribute_name(:year)
-            %th= Entry.human_attribute_name(:quantity)
+            %td= Entry.human_attribute_name(:transactions)
             %td= Entry.human_attribute_name(:purchase_date)
             %td= Entry.human_attribute_name(:store)
             %td= Entry.human_attribute_name(:town)
@@ -26,7 +26,7 @@
                   = link_to t('.edit'), edit_entry_path(entry), class: "daisy-btn daisy-btn-accent daisy-btn-sm"
               %td.font-bold.min-w-80= entry.wine.name
               %td.font-bold= entry.wine.year
-              %th.font-bold= entry.quantity
+              %th.font-bold= entry.transactions.sum(&:quantity)
               %td= entry.purchase_date
               %td= entry.store
               %td= entry.town

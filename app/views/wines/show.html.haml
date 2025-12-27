@@ -27,40 +27,57 @@
           .daisy-stat-value.text-primary= t(@wine.note) || '-'
           .daisy-stat-desc TODO - moyenne
 
-  .mb-8
-    .mb-1.text-md.font-light= Wine.human_attribute_name(:comment)
-    = @wine.comment || '-'
+  .flex.gap-16.items-top
+    %div
+      %h2.mb-6.text-accent= Entry.human_attribute_name(:bottles)
+      %table.daisy-table.daisy-table-zebra.daisy-table-pin-cols.daisy-table-pin-rows.w-80
+        %thead
+          %tr
+            %td= Transaction.human_attribute_name(:original_quantity)
+            %td= Transaction.human_attribute_name(:location)
+        %tbody
+          - @wine.transactions.each do |transaction|
+            %tr
+              %td.font-semibold= transaction.quantity
+              %td.font-semibold= transaction.location.name
 
-  .w-full.flex.mb-8
-    %div{ class: 'w-1/4' }
-      .mb-1.text-md.font-light= Wine.human_attribute_name(:color)
-      %span= enum_i18n(Wine, :color, @wine.color)
-    %div{ class: 'w-1/4' }
-      .mb-1.text-md.font-light= Wine.human_attribute_name(:ticket)
-      %span= @wine.ticket || '-'
-    %div{ class: 'w-1/4' }
-      .mb-1.text-md.font-light= Wine.human_attribute_name(:aged)
-      %span= @wine.aged || '-'
-    %div{ class: 'w-1/4' }
-      .mb-1.text-md.font-light= Wine.human_attribute_name(:variety)
-      %span= @wine.variety || '-'
+    .flex-grow-1
+      %h2.mb-6.text-accent= t('.details')
 
-  .w-full.flex.mb-8
-    %div{ class: 'w-1/4' }
-      .mb-1.text-md.font-light= Wine.human_attribute_name(:volume)
-      %span= @wine.volume || '-'
-    %div{ class: 'w-1/4' }
-      .mb-1.text-md.font-light= Wine.human_attribute_name(:titration)
-      %span= @wine.titration || '-'
-    %div{ class: 'w-1/4' }
-      .mb-1.text-md.font-light= Wine.human_attribute_name(:bottling)
-      %span= @wine.bottling || '-'
-    %div{ class: 'w-1/4' }
-      .mb-1.text-md.font-light= Wine.human_attribute_name(:organic)
-      %span= t(@wine.organic) || '-'
+      .mb-8
+        .mb-1.font-semibold= Wine.human_attribute_name(:comment)
+        = @wine.comment || '-'
 
-  %div{ class:"grid grid-flow-row-dense xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6",
-    data: { controller: "lightbox" } }
-    - [*@wine.front_label_pictures, *@wine.back_label_pictures].each_with_index do |picture, index|
-      %div{ class: "w-[260px] h-[200px] rounded-md object-cover overflow-clip cursor-pointer" }
-        = image_tag picture, data: { action: "click->lightbox#open", full_src: rails_blob_path(picture), lightbox_target: "img" }
+      .w-full.flex.mb-8
+        %div{ class: 'w-1/4' }
+          .mb-1.font-semibold= Wine.human_attribute_name(:color)
+          %span= enum_i18n(Wine, :color, @wine.color)
+        %div{ class: 'w-1/4' }
+          .mb-1.font-semibold= Wine.human_attribute_name(:ticket)
+          %span= @wine.ticket || '-'
+        %div{ class: 'w-1/4' }
+          .mb-1.font-semibold= Wine.human_attribute_name(:aged)
+          %span= @wine.aged || '-'
+        %div{ class: 'w-1/4' }
+          .mb-1.font-semibold= Wine.human_attribute_name(:variety)
+          %span= @wine.variety || '-'
+
+      .w-full.flex.mb-8
+        %div{ class: 'w-1/4' }
+          .mb-1.font-semibold= Wine.human_attribute_name(:volume)
+          %span= @wine.volume || '-'
+        %div{ class: 'w-1/4' }
+          .mb-1.font-semibold= Wine.human_attribute_name(:titration)
+          %span= @wine.titration || '-'
+        %div{ class: 'w-1/4' }
+          .mb-1.font-semibold= Wine.human_attribute_name(:bottling)
+          %span= @wine.bottling || '-'
+        %div{ class: 'w-1/4' }
+          .mb-1.font-semibold= Wine.human_attribute_name(:organic)
+          %span= t(@wine.organic) || '-'
+
+      %div{ class:"grid grid-flow-row-dense xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6",
+        data: { controller: "lightbox" } }
+        - [*@wine.front_label_pictures, *@wine.back_label_pictures].each_with_index do |picture, index|
+          %div{ class: "w-[260px] h-[200px] rounded-md object-cover overflow-clip cursor-pointer" }
+            = image_tag picture, data: { action: "click->lightbox#open", full_src: rails_blob_path(picture), lightbox_target: "img" }

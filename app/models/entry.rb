@@ -6,14 +6,18 @@ class Entry < ApplicationRecord
   # Callbacks
 
   # Attr_accessor
-  belongs_to :wine
+  attribute :purchase_date, default: Date.today
 
   # Associations
+  belongs_to :wine
+
+  has_many :transactions, as: :source
+  accepts_nested_attributes_for :transactions, allow_destroy: true
 
   # Validations
   normalizes :store, :town, with: ->(string) { string.strip.presence }
 
-  # validates :name, presence: true
+  validates :transactions, presence: true
 
   # Delegation
 

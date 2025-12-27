@@ -1,0 +1,15 @@
+---
+fr:
+  activerecord:
+    attributes:
+      transaction:
+        created_at: Date
+        location: Emplacement
+        location_id: Emplacement
+        quantity: Nombre
+        source_type: Source
+        source_types:
+          'Entry': Entrée (achat, don)
+          'Event': Évènement
+        wine: Vin
+        wine_id: Vin

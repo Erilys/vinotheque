@@ -3,10 +3,11 @@ fr:
   activerecord:
     attributes:
       entry:
+        transactions: Transactions
+        comment: Commentaire
         gift: Cadeau
         price_per_bottle_in_cents: Prix d'une bouteille en centimes
         purchase_date: Date d'achat
-        quantity: Quantité
         store: Magasin
         town: Ville
         wine: Vin

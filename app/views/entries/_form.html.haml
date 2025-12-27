@@ -14,20 +14,61 @@
             = error.full_message
 
     .w-full.flex.gap-3.mb-6
-      = f.input :quantity, wrapper_html: { class: 'w-1/4' }
+      .mb-3
+        %label.daisy-input.w-full
+          %span.daisy-label= Entry.human_attribute_name(:purchase_date)
+          = f.date_field :purchase_date,
+            start_year: Date.today.year - 50,
+            end_year: Date.today.year + 1,
+            order: [:day, :month, :year],
+            value: entry.purchase_date
+
+    .w-full.flex.gap-3.mb-6
       = f.input :wine_id,
         collection: Wine.order(:name, :year).map{ |wine| [wine.name_and_year, wine.id] },
         wrapper_html: { class: 'w-1/2' }
-
-    .w-full.flex.items-baseline-last.gap-3.mb-6
-      = f.input :price_per_bottle_in_cents, wrapper_html: { class: 'w-1/4' }
-      = f.input :gift, input_html: { class: 'daisy-toggle-accent' }
 
     .w-full.flex.gap-3.mb-6
       = f.input :store, collection: Entry.distinct(:store).order(:store).pluck(:store), wrapper_html: { class: 'w-1/4' }
       = f.input :store, label: t('.new_store'), input_html: { name: 'entry[new_store]', value: nil }, wrapper_html: { class: 'w-1/4' }
       = f.input :town, wrapper_html: { class: 'w-1/4' }
-      -# = f.input :purchase_date
+
+    .w-full.mb-6
+      = f.input :comment, as: :string
+
+    %h2.text-accent.mb-6= Entry.human_attribute_name(:transaction)
+    - transactions = @entry.transactions.to_a
+    - transactions_index = transactions.length
+    - transactions << Transaction.new(source: entry)
+    #transactions{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': transactions_index, 'data-nested-form-index-name-value': "INDEX_FOR_TRANSACTIONS"}
+      .flex.gap-9
+        = button_tag t('.add_locations'),
+          type: :button,
+          class: 'daisy-btn daisy-btn-accent',
+          data: { action: 'click->nested-form#addItem' }
+
+        %div
+          - transactions.each_with_index do |transaction, i|
+            - is_transaction_template = (i == transactions_index)
+            = f.simple_fields_for "transactions_attributes][#{is_transaction_template ? "INDEX_FOR_TRANSACTIONS" : i}", transaction do |ff|
+              %div{is_transaction_template ? {'data-nested-form-target': 'template', class: 'hidden'} : {'data-nested-form-item': ''}}
+                .w-full.flex.gap-3.items-center
+                  = ff.input :id, label: false, as: :hidden
+                  = ff.input :_destroy, label: false, as: :hidden
+                  = ff.input :source_type, label: false, as: :hidden
+                  = ff.input :quantity, input_html: { class: 'min-w-32' }, wrapper_html: { class: 'w-1/3' }
+                  = ff.input :location_id, collection: Location.all.sort, wrapper_html: { class: 'w-2/3' }
+
+                  = button_tag type: :button,
+                    class: 'text-accent mb-3',
+                    name: "#{f.object_name}[remove]",
+                    title: t('.delete_transaction'),
+                    data: { action: 'click->nested-form#removeItem' } do
+                    %i.fa-solid.fa-trash
+
+    .w-full.flex.items-baseline-last.gap-3.my-6
+      = f.input :price_per_bottle_in_cents, wrapper_html: { class: 'w-1/4' }
+      = f.input :gift, input_html: { class: 'daisy-toggle-accent' }
 
     = f.button :submit, t('submit'), class: 'daisy-btn daisy-btn-primary'
     = link_to t('go_to_root'), wines_path, class: "daisy-btn"

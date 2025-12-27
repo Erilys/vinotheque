@@ -5,15 +5,20 @@ fr:
       go_to_show: Retourner à l'entrée
       title: Modifier une entrée
     form:
+      add_locations: Ajouter un emplacement
       new_store: Nouveau magasin
     index:
       actions: Actions
       edit: Modifier
       new_entry: Nouvelle entrée
       show: Voir
-      title: Toutes les entrées
+      title: Tous les achats
     new:
       title: Nouvelle entrée (achat, cadeau...)
     show:
       destroy: Supprimer
+      details: Détails de l'achat
       edit: Modifier
+      summary:
+        one: Une bouteille de %{wine_name}
+        other: '%{count} bouteilles de %{wine_name}'
