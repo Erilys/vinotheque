@@ -29,5 +29,24 @@
   .mb-9
     = f.input :organic, input_html: { class: 'daisy-toggle-success' }
 
+  - %i[front_label_pictures back_label_pictures].each do |pictures_category|
+
+    %div.my-5
+      %h2.text-accent= Wine.human_attribute_name(pictures_category)
+      .max-w-80.mb-6
+        = f.input pictures_category, label: t('.add_pictures'), input_html: { multiple: true }
+
+      %div{ class:"grid grid-flow-row-dense xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6",
+      data: { controller: "lightbox" } }
+        - wine.send(pictures_category).each do |picture|
+          = turbo_frame_tag picture do
+            %div{ class: "w-[260px] h-[200px] rounded-md object-cover overflow-clip cursor-pointer" }
+              = image_tag picture, data: { action: "click->lightbox#open", full_src: rails_blob_path(picture), lightbox_target: "img" }
+            .text-center
+              = link_to wine_pictures_attachment_path(wine, picture, picture_type: pictures_category), data: { turbo_method: :delete, turbo_confirm: t('.confirm_destroy_picture') } do
+                .daisy-btn.daisy-btn-accent.m-3
+                  %i.fa-solid.fa-trash
+                  = t('.delete')
+
   = f.button :submit, t('submit'), class: 'daisy-btn daisy-btn-primary'
   = link_to t('go_to_root'), wines_path, class: "daisy-btn"

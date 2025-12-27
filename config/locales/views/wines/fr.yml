@@ -4,6 +4,10 @@ fr:
     edit:
       title: Modifier un vin
       go_to_show: Retourner au vin
+    form:
+      add_pictures: Ajouter des photos
+      delete: Supprimer
+      confirm_destroy_picture: Êtes-vous sûr ? SUPPRESSION DÉFINITIVE
     index:
       actions: Actions
       all_entries: Toutes les entrées

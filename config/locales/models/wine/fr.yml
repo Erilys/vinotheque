@@ -4,6 +4,7 @@ fr:
     attributes:
       wine:
         aged: Élevage
+        back_label_pictures: Photos de l'étiquette (dos)
         bottling: Embouteillage
         color: Couleur
         colors:
@@ -11,6 +12,7 @@ fr:
           red: Rouge
           white: Blanc
         comment: Commentaire
+        front_label_pictures: Photos de l'étiquette (devant)
         name: Nom
         note: Note
         organic: Biologique

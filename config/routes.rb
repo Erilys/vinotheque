@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "wines#index"
 
-  resources :wines
+  resources :wines do
+    resources :pictures_attachments, only: %i[destroy]
+  end
   resources :entries
 end
