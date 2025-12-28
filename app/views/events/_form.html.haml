@@ -28,14 +28,14 @@
 
     .mb-12.max-w-6xl
       %h2.text-accent.mb-6= t('.the_bottles')
-      - transactions = @event.transactions.to_a
-      - transactions_index = transactions.length
-      - transactions << Transaction.new(source: event)
-      #transactions{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': transactions_index, 'data-nested-form-index-name-value': "INDEX_FOR_TRANSACTIONS"}
-        - transactions.each_with_index do |transaction, i|
-          - is_transaction_template = (i == transactions_index)
-          = f.simple_fields_for "transactions_attributes][#{is_transaction_template ? "INDEX_FOR_TRANSACTIONS" : i}", transaction do |ff|
-            %div{is_transaction_template ? {'data-nested-form-target': 'template', class: 'hidden'} : {'data-nested-form-item': ''}}
+      - operations = @event.operations.to_a
+      - operations_index = operations.length
+      - operations << Operation.new(source: event)
+      #operations{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': operations_index, 'data-nested-form-index-name-value': "INDEX_FOR_OPERATIONS"}
+        - operations.each_with_index do |operation, i|
+          - is_operation_template = (i == operations_index)
+          = f.simple_fields_for "operations_attributes][#{is_operation_template ? "INDEX_FOR_OPERATIONS" : i}", operation do |ff|
+            %div{is_operation_template ? {'data-nested-form-target': 'template', class: 'hidden'} : {'data-nested-form-item': ''}}
               .w-full.flex.gap-3.items-center
                 = ff.input :id, label: false, as: :hidden
                 = ff.input :_destroy, label: false, as: :hidden
@@ -47,7 +47,7 @@
                 = button_tag type: :button,
                   class: 'text-accent mb-3',
                   name: "#{f.object_name}[remove]",
-                  title: t('.delete_transaction'),
+                  title: t('.delete_operation'),
                   data: { action: 'click->nested-form#removeItem' } do
                   %i.fa-solid.fa-trash
 

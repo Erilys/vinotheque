@@ -1,0 +1,30 @@
+.w-full
+  - if notice.present?
+    %p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-md.inline-block{ id: :notice }
+      = notice
+
+  .mb-8.flex.justify-between.items-end
+    .flex.items-end.gap-3
+      = image_tag 'icons/flaticon-wine-menu.png', class: 'w-20 h-20'
+      %h1.font-bold.text-primary= t('.title')
+
+  %div#operations.min-w-full.divide-y.divide-gray-200.space-y-5
+    .overflow-x-auto
+      %table.daisy-table.daisy-table-zebra.daisy-table-pin-cols.daisy-table-pin-rows
+        %thead
+          %tr
+            %td= Operation.human_attribute_name(:quantity)
+            %td= Operation.human_attribute_name(:wine)
+            %td= Wine.human_attribute_name(:year)
+            %td= Operation.human_attribute_name(:location)
+            %td= Operation.human_attribute_name(:source_type)
+            %td= Operation.human_attribute_name(:created_at)
+        %tbody
+          - @operations.each do |operation|
+            %tr{ id: dom_id(operation) }
+              %td.font-bold= operation.quantity
+              %td.font-bold.min-w-80= operation.wine.name
+              %td.font-bold= operation.wine.year
+              %td.font-bold= operation.location.name
+              %td.font-bold= enum_i18n(Operation, :source_type, operation.source_type)
+              %td.font-bold= l(operation.created_at.to_date)

@@ -1,4 +1,4 @@
-class Transaction < ApplicationRecord
+class Operation < ApplicationRecord
   # Constants
 
   # Scopes

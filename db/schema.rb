@@ -71,7 +71,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_154052) do
     t.index ["name"], name: "index_locations_on_name", unique: true
   end
 
-  create_table "transactions", force: :cascade do |t|
+  create_table "operations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "location_id"
     t.integer "quantity"
@@ -79,9 +79,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_154052) do
     t.string "source_type"
     t.datetime "updated_at", null: false
     t.bigint "wine_id", null: false
-    t.index ["location_id"], name: "index_transactions_on_location_id"
-    t.index ["source_id"], name: "index_transactions_on_source_id"
-    t.index ["wine_id"], name: "index_transactions_on_wine_id"
+    t.index ["location_id"], name: "index_operations_on_location_id"
+    t.index ["source_id"], name: "index_operations_on_source_id"
+    t.index ["wine_id"], name: "index_operations_on_wine_id"
   end
 
   create_table "wines", force: :cascade do |t|

@@ -1,6 +1,6 @@
 ---
 fr:
-  transactions:
+  operations:
     index:
       actions: Actions
       title: Les transactions

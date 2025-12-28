@@ -3,7 +3,7 @@
     layouts:
       navbar:
         all_entries: Les achats
-        all_transactions: Les transactions
+        all_operations: Les transactions
         all_events: Les évènements
         all_wines: Les vins
         new_entry: Ajouter une entrée

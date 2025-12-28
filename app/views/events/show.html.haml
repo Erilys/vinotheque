@@ -11,19 +11,19 @@
 
   .flex.gap-16.items-top
     %div
-      %h2.mb-2.text-accent= Event.human_attribute_name(:transactions)
+      %h2.mb-2.text-accent= Event.human_attribute_name(:operations)
       %table.daisy-table
         %thead
           %tr
-            %td.pl-0= Transaction.human_attribute_name(:wine)
-            %td= Transaction.human_attribute_name(:quantity)
-            %td= Transaction.human_attribute_name(:location)
+            %td.pl-0= Operation.human_attribute_name(:wine)
+            %td= Operation.human_attribute_name(:quantity)
+            %td= Operation.human_attribute_name(:location)
         %tbody
-          - @event.transactions.each do |transaction|
+          - @event.operations.each do |operation|
             %tr
-              %td.pl-0.font-semibold.min-w-80= transaction.wine.name
-              %td.font-semibold= transaction.quantity.abs
-              %td.font-semibold= transaction.location.name
+              %td.pl-0.font-semibold.min-w-80= operation.wine.name
+              %td.font-semibold= operation.quantity.abs
+              %td.font-semibold= operation.location.name
 
     .flex-grow-1
       %h2.mb-6.text-accent= t('.the_event')

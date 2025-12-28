@@ -13,7 +13,7 @@ class Wine < ApplicationRecord
   has_many_attached :back_label_pictures
 
   has_many :entries
-  has_many :transactions
+  has_many :operations
 
   # Validations
   normalizes :aged, :bottling, :comment, :name, :titration, :variety, :volume, with: ->(string) { string.strip.presence }
@@ -28,6 +28,6 @@ class Wine < ApplicationRecord
   end
 
   def total_stock
-    transactions.sum(&:quantity)
+    operations.sum(&:quantity)
   end
 end
