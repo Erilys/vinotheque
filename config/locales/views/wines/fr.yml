@@ -22,4 +22,8 @@ fr:
       title: Nouveau vin
     show:
       destroy: Supprimer
+      details: Description
       edit: Modifier
+      average_base_on:
+        one: Moyenne sur 1 évènement
+        other: Moyenne sur %{count} évènements

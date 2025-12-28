@@ -13,7 +13,8 @@ class Wine < ApplicationRecord
   has_many_attached :back_label_pictures
 
   has_many :entries
-  has_many :operations
+  has_many :drinks
+  has_many :stocks
 
   # Validations
   normalizes :aged, :bottling, :comment, :name, :titration, :variety, :volume, with: ->(string) { string.strip.presence }
@@ -27,7 +28,14 @@ class Wine < ApplicationRecord
     "#{name} - #{year} "
   end
 
+  def note
+    drinks_notes = drinks.map(&:note).compact
+    return unless drinks_notes.any?
+
+    drinks_notes.sum / drinks_notes.length
+  end
+
   def total_stock
-    operations.sum(&:quantity)
+    stocks.sum(&:quantity).to_i
   end
 end

@@ -1,4 +1,5 @@
 class Operation < ApplicationRecord
+  include OperationConcern
   # Constants
 
   # Scopes
@@ -11,7 +12,6 @@ class Operation < ApplicationRecord
 
   # Associations
   belongs_to :location
-  belongs_to :wine
   belongs_to :source, polymorphic: true
 
   belongs_to :event, optional: true

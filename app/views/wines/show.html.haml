@@ -25,21 +25,21 @@
           -#   = image_tag 'icons/search_icon.svg'
           .daisy-stat-title= Wine.human_attribute_name(:note)
           .daisy-stat-value.text-primary= t(@wine.note) || '-'
-          .daisy-stat-desc TODO - moyenne
+          .daisy-stat-desc= t('.average_base_on', count: @wine.drinks.map(&:note).compact.length)
 
   .flex.gap-16.items-top
     %div
-      %h2.mb-6.text-accent= Wine.human_attribute_name(:operations)
+      %h2.mb-6.text-accent= Wine.human_attribute_name(:stocks)
       %table.daisy-table
         %thead
           %tr
             %td.pl-0= Operation.human_attribute_name(:quantity)
             %td= Operation.human_attribute_name(:location)
         %tbody
-          - @wine.operations.each do |operation|
+          - @wine.stocks.each do |stock|
             %tr
-              %td.pl-0.font-semibold= operation.quantity
-              %td.font-semibold= operation.location.name
+              %td.pl-0.font-semibold= stock.quantity.to_i
+              %td.font-semibold= stock.location.name
 
     .flex-grow-1
       %h2.mb-6.text-accent= t('.details')

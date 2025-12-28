@@ -7,21 +7,20 @@ require 'faker'
 Wine.destroy_all
 
 [
-  ['K-0113', "NERO D'AVOLA SYRAH", 2017, nil],
-  ['K-0495', 'BEAUJOLAIS NOUVEAU 2018 Nicolas', 2018, nil],
-  ['K-0093', 'PINOT GRIS ALSACE', 2015, nil],
-  ['K-0092', 'PINOT GRIS ALSACE', 2017, nil],
-  ['K-0060', 'TENTATION DU PASTEUR', 2010, 14],
-  ['K-0062', 'TENTATION DU PASTEUR', 2012, 13],
-  ['K-0063', 'NUITS SAINT GEORGE', 2016, 16],
-  ['K-0012', "PAYS D'OC blanc sauvignon", 2013, 10],
-  ['K-0017', "LA FAVEUR DES MUSES Ollon Chasselas", 2013, 10]
+  ['K-0113', "NERO D'AVOLA SYRAH", 2017],
+  ['K-0495', 'BEAUJOLAIS NOUVEAU 2018 Nicolas', 2018],
+  ['K-0093', 'PINOT GRIS ALSACE', 2015],
+  ['K-0092', 'PINOT GRIS ALSACE', 2017],
+  ['K-0060', 'TENTATION DU PASTEUR', 2010],
+  ['K-0062', 'TENTATION DU PASTEUR', 2012],
+  ['K-0063', 'NUITS SAINT GEORGE', 2016],
+  ['K-0012', "PAYS D'OC blanc sauvignon", 2013],
+  ['K-0017', "LA FAVEUR DES MUSES Ollon Chasselas", 2013]
 ].each do |xl_id, name, year, note|
   Wine.create!(
     xl_id:,
     name:,
-    year:,
-    note:
+    year:
   )
 end
 
@@ -61,5 +60,17 @@ event = Event.new(
 drink = event.drinks.build(
   note: 18, comment: 'fameux', wine: Wine.first,
   location: first_location, quantity: 2
+)
+event.save!
+
+event = Event.new(
+  start_date: Time.zone.today,
+  name: 'Christmas 2026',
+  comment: 'Merry Christmas !',
+  comment_wine: 'Good stuff'
+)
+drink = event.drinks.build(
+  note: 8, comment: 'pas terrible', wine: Wine.first,
+  location: last_location, quantity: 2
 )
 event.save!
