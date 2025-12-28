@@ -1,6 +1,6 @@
-class CreateEntries < ActiveRecord::Migration[8.1]
+class CreatePurchases < ActiveRecord::Migration[8.1]
   def change
-    create_table :entries do |t|
+    create_table :purchases do |t|
       t.references :wine, null: false
       t.integer :price_per_bottle_in_cents, default: 0
       t.string :store

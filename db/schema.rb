@@ -56,19 +56,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_204556) do
     t.index ["wine_id"], name: "index_drinks_on_wine_id"
   end
 
-  create_table "entries", force: :cascade do |t|
-    t.text "comment"
-    t.datetime "created_at", null: false
-    t.boolean "gift", default: false, null: false
-    t.integer "price_per_bottle_in_cents", default: 0
-    t.date "purchase_date", default: -> { "CURRENT_TIMESTAMP" }
-    t.string "store"
-    t.string "town"
-    t.datetime "updated_at", null: false
-    t.bigint "wine_id", null: false
-    t.index ["wine_id"], name: "index_entries_on_wine_id"
-  end
-
   create_table "events", force: :cascade do |t|
     t.text "comment"
     t.datetime "created_at", null: false
@@ -96,6 +83,19 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_204556) do
     t.index ["location_id"], name: "index_operations_on_location_id"
     t.index ["source_id"], name: "index_operations_on_source_id"
     t.index ["wine_id"], name: "index_operations_on_wine_id"
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.boolean "gift", default: false, null: false
+    t.integer "price_per_bottle_in_cents", default: 0
+    t.date "purchase_date", default: -> { "CURRENT_TIMESTAMP" }
+    t.string "store"
+    t.string "town"
+    t.datetime "updated_at", null: false
+    t.bigint "wine_id", null: false
+    t.index ["wine_id"], name: "index_purchases_on_wine_id"
   end
 
   create_table "wines", force: :cascade do |t|
