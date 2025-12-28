@@ -13,8 +13,8 @@ class Event < ApplicationRecord
   has_many :operations, as: :source
   accepts_nested_attributes_for :operations, allow_destroy: true
 
-  has_many :exits
-  accepts_nested_attributes_for :exits, allow_destroy: true
+  has_many :drinks
+  accepts_nested_attributes_for :drinks, allow_destroy: true
 
   # Validations
   normalizes :comment, :comment_wine, with: ->(string) { string.strip.presence }

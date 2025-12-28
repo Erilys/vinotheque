@@ -51,12 +51,15 @@ Wine.find_each do |wine|
 end
 
 Event.destroy_all
+Drink.destroy_all
 event = Event.new(
   start_date: Time.zone.today,
   name: 'Christmas 2025',
   comment: 'Merry Christmas !',
   comment_wine: 'Good stuff'
 )
-exit = event.exits.build(note: 18)
-exit.operations.build(location: first_location, wine: Wine.first, quantity: -2)
+drink = event.drinks.build(
+  note: 18, comment: 'fameux', wine: Wine.first,
+  location: first_location, quantity: 2
+)
 event.save!

@@ -3,7 +3,8 @@ fr:
   activerecord:
     attributes:
       event:
-        comment: Commentaire sur l'évènement
+        comment: Commentaire
+        end_date: Date de fin
         name: Nom
         start_date: Date de début
-        operations: Les bouteilles
+        drinks: Les bouteilles

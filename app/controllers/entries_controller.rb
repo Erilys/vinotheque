@@ -47,7 +47,7 @@ class EntriesController < ApplicationController
   end
 
   def entry_params
-    params.expect(entry: [ :quantity, :wine_id, :price_per_bottle_in_cents, :gift, :store, :new_store, :town, { operations_attributes: [%i[_destroy id location_id quantity]] } ]).tap do |parameters|
+    params.expect(entry: [ :quantity, :wine_id, :comment, :price_per_bottle_in_cents, :gift, :store, :new_store, :town, { operations_attributes: [%i[_destroy id location_id quantity]] } ]).tap do |parameters|
       parameters[:store] = parameters[:new_store] if parameters[:new_store].presence
       parameters.delete :new_store
     end

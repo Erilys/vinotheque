@@ -14,47 +14,56 @@
             = error.full_message
 
     .w-full.flex.gap-3.mb-6
-      .mb-3
-        %label.daisy-input.w-full
-          %span.daisy-label= Event.human_attribute_name(:start_date)
-          = f.date_field :start_date,
+      - %i[start_date end_date].each do |date|
+        %label.daisy-input.w-full.max-w-72
+          %span.daisy-label= Event.human_attribute_name(date)
+          = f.date_field date,
             start_year: Date.today.year - 50,
             end_year: Date.today.year + 1,
             order: [:day, :month, :year],
-            value: event.start_date
+            value: event.send(date)
 
     .w-full.mb-6
       = f.input :comment, as: :string
 
-    .mb-12.max-w-6xl
+    .mb-12
       %h2.text-accent.mb-6= t('.the_bottles')
-      - operations = @event.operations.to_a
-      - operations_index = operations.length
-      - operations << Operation.new(source: event)
-      #operations{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': operations_index, 'data-nested-form-index-name-value': "INDEX_FOR_OPERATIONS"}
-        - operations.each_with_index do |operation, i|
-          - is_operation_template = (i == operations_index)
-          = f.simple_fields_for "operations_attributes][#{is_operation_template ? "INDEX_FOR_OPERATIONS" : i}", operation do |ff|
-            %div{is_operation_template ? {'data-nested-form-target': 'template', class: 'hidden'} : {'data-nested-form-item': ''}}
-              .w-full.flex.gap-3.items-center
-                = ff.input :id, label: false, as: :hidden
-                = ff.input :_destroy, label: false, as: :hidden
-                = ff.input :source_type, label: false, as: :hidden
-                = ff.input :wine_id, collection: Wine.all.sort, input_html: { class: 'min-w-32' }, wrapper_html: { class: 'w-2/4' }
-                = ff.input :quantity, input_html: { class: 'min-w-32' }, wrapper_html: { class: 'w-1/4' }
-                = ff.input :location_id, collection: Location.all.sort, wrapper_html: { class: 'w-1/4' }
+      - drinks = @event.drinks.to_a
+      - drinks_index = drinks.length
+      - drinks << Drink.new(event:)
+      #drinks{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': drinks_index, 'data-nested-form-index-name-value': "INDEX_FOR_OPERATIONS"}
+        - drinks.each_with_index do |drink, i|
+          - is_drink_template = (i == drinks_index)
+          = f.simple_fields_for "drinks_attributes][#{is_drink_template ? "INDEX_FOR_OPERATIONS" : i}", drink do |ff|
+            .w-full.flex.gap-12.items-center.mb-12{is_drink_template ? {'data-nested-form-target': 'template', class: 'hidden'} : {'data-nested-form-item': ''}}
+              %div.flex-grow-1
+                .w-full.flex.gap-3.items-center
+                  = ff.input :id, label: false, as: :hidden
+                  = ff.input :_destroy, label: false, as: :hidden
+                  = ff.input :wine_id, collection: Wine.all.sort, input_html: { class: 'min-w-32' }, wrapper_html: { class: 'w-2/4' }
+                  = ff.input :quantity, input_html: { class: 'min-w-32' }, wrapper_html: { class: 'w-1/4' }
+                  = ff.input :location_id, collection: Location.all.sort, wrapper_html: { class: 'w-1/4' }
 
-                = button_tag type: :button,
-                  class: 'text-accent mb-3',
-                  name: "#{f.object_name}[remove]",
-                  title: t('.delete_operation'),
-                  data: { action: 'click->nested-form#removeItem' } do
-                  %i.fa-solid.fa-trash
+                .w-full.flex.gap-3.items-center
+                  = ff.input :comment, as: :string, input_html: { class: 'min-w-32' }, wrapper_html: { class: 'w-2/4' }
+                  = ff.input :note, input_html: { class: 'min-w-32' }, wrapper_html: { class: 'w-1/4' }
+                  -# PICTURES
+                  - if drink.persisted?
+                    - drink.pictures.each do |picture|
+                      = ff.hidden_field :pictures, multiple: true, value: picture.signed_id
+                  = ff.input :pictures, label: false, input_html: { multiple: true }
 
-      = button_tag t('.add_drink'),
-        type: :button,
-        class: 'daisy-btn daisy-btn-accent',
-        data: { action: 'click->nested-form#addItem' }
+              = button_tag type: :button,
+                class: 'text-accent mb-3',
+                name: "#{f.object_name}[remove]",
+                title: t('.delete_drink'),
+                data: { action: 'click->nested-form#removeItem' } do
+                %i.fa-solid.fa-trash
+
+        = button_tag t('.add_drink'),
+          type: :button,
+          class: 'daisy-btn daisy-btn-accent',
+          data: { action: 'click->nested-form#addItem' }
 
     = f.button :submit, t('submit'), class: 'daisy-btn daisy-btn-primary'
     - if event.persisted?

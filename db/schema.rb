@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_28_154052) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_28_182116) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,20 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_154052) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "drinks", force: :cascade do |t|
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.bigint "event_id"
+    t.bigint "location_id"
+    t.integer "note"
+    t.integer "quantity", default: 1, null: false
+    t.datetime "updated_at", null: false
+    t.bigint "wine_id", null: false
+    t.index ["event_id"], name: "index_drinks_on_event_id"
+    t.index ["location_id"], name: "index_drinks_on_location_id"
+    t.index ["wine_id"], name: "index_drinks_on_wine_id"
   end
 
   create_table "entries", force: :cascade do |t|

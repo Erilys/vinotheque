@@ -1,0 +1,13 @@
+---
+fr:
+  activerecord:
+    attributes:
+      drink:
+        comment: Commentaire
+        location: Emplacement
+        location_id: Emplacement
+        note: Note
+        pictures: Photos
+        quantity: Quantité
+        wine: Vin
+        wine_id: Vin

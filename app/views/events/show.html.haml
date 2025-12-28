@@ -1,39 +1,48 @@
 = content_for :title, @event.name
 
 .w-full
-  .flex.justify-between
+  .flex.justify-between.items-start
     %div
-      %h1.text-primary= @event.name
       %div.flex.gap-3.mt-6.mb-12
+        %h1.text-primary= @event.name
         = link_to t('.edit'), edit_event_path(@event), class: "daisy-btn daisy-btn-accent"
         = button_to t('.destroy'), @event, method: :delete, class: "daisy-btn", data: { turbo_confirm: "Are you sure?" }
-        = link_to t('go_to_root'), events_path, class: "daisy-btn"
 
-  .flex.gap-16.items-top
-    %div
-      %h2.mb-2.text-accent= Event.human_attribute_name(:operations)
-      %table.daisy-table
-        %thead
+    .daisy-stats.daisy-shadow
+      .daisy-stat
+        .daisy-stat-title= Event.human_attribute_name(:start_date)
+        .daisy-stat-value.text-primary= l(@event.start_date)
+      .daisy-stat
+        .daisy-stat-title= Event.human_attribute_name(:end_date)
+        .daisy-stat-value.text-primary= @event.end_date.present? ? l(@event.end_date) : '-'
+
+  .mb-8
+    .mb-1.font-semibold= Event.human_attribute_name(:comment)
+    = @event.comment || '-'
+
+  %div
+    %h2.mb-2.text-accent= Event.human_attribute_name(:drinks)
+    %table.daisy-table
+      %thead
+        %tr
+          %td.pl-0= Drink.human_attribute_name(:wine)
+          %td= Drink.human_attribute_name(:note)
+          %td= Drink.human_attribute_name(:comment)
+          %td= Drink.human_attribute_name(:pictures)
+      %tbody
+        - @event.drinks.each do |drink|
           %tr
-            %td.pl-0= Operation.human_attribute_name(:wine)
-            %td= Operation.human_attribute_name(:quantity)
-            %td= Operation.human_attribute_name(:location)
-        %tbody
-          - @event.operations.each do |operation|
-            %tr
-              %td.pl-0.font-semibold.min-w-80= operation.wine.name
-              %td.font-semibold= operation.quantity.abs
-              %td.font-semibold= operation.location.name
+            %td.pl-0.font-semibold.min-w-80
+              = link_to drink.wine.name, drink.wine, class: 'daisy-link daisy-link-hover'
+            %td.font-semibold= drink.note || '-'
+            %td.font-semibold= drink.comment || '-'
+            %td{ class:"flex gap-3", data: { controller: "lightbox" } }
+              - drink.pictures.each_with_index do |picture, index|
+                %div{ class: "w-[180px] h-[120px] rounded-md object-cover overflow-clip cursor-pointer" }
+                  = image_tag picture, data: { action: "click->lightbox#open", full_src: rails_blob_path(picture), lightbox_target: "img" }
 
-    .flex-grow-1
-      %h2.mb-6.text-accent= t('.the_event')
-
-      .mb-8
-        .mb-1.font-semibold= Event.human_attribute_name(:comment)
-        = @event.comment || '-'
-
-      %div{ class:"grid grid-flow-row-dense xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6",
-        data: { controller: "lightbox" } }
-        - @event.pictures.each_with_index do |picture, index|
-          %div{ class: "w-[260px] h-[200px] rounded-md object-cover overflow-clip cursor-pointer" }
-            = image_tag picture, data: { action: "click->lightbox#open", full_src: rails_blob_path(picture), lightbox_target: "img" }
+  %div{ class:"grid grid-flow-row-dense xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6",
+    data: { controller: "lightbox" } }
+    - @event.pictures.each_with_index do |picture, index|
+      %div{ class: "w-[260px] h-[200px] rounded-md object-cover overflow-clip cursor-pointer" }
+        = image_tag picture, data: { action: "click->lightbox#open", full_src: rails_blob_path(picture), lightbox_target: "img" }

@@ -184,7 +184,7 @@ SimpleForm.setup do |config|
 
   # vertical file input
   config.wrappers :vertical_file, tag: 'div',
-                                  class: 'form-group',
+                                  class: 'mb-3',
                                   error_class: 'form-group-invalid',
                                   valid_class: 'form-group-valid' do |b|
     b.use :html5
