@@ -14,8 +14,6 @@ class Operation < ApplicationRecord
   belongs_to :location
   belongs_to :source, polymorphic: true
 
-  belongs_to :event, optional: true
-
   # Validations
 
   # Delegation

@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :set_wine, only: %i[ show edit update destroy ]
 
   def index
-    @events = Event.includes(:operations).order(start_date: :desc)
+    @events = Event.includes(:drinks).order(start_date: :desc)
   end
 
   def show
