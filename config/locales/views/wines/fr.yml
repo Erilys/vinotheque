@@ -11,6 +11,7 @@ fr:
     index:
       actions: Actions
       add_entry: Achat
+      add_event: Évènement
       edit: Modifier
       new_entry: Ajouter une entrée
       new_wine: Ajouter un vin

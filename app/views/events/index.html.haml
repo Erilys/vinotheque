@@ -1,0 +1,31 @@
+.w-full
+  - if notice.present?
+    %p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-md.inline-block{ id: :notice }
+      = notice
+
+  .mb-8.flex.justify-between.items-end
+    .flex.items-end.gap-3
+      = image_tag 'icons/flaticon-wine.png', class: 'w-20 h-20'
+      %h1.font-bold.text-primary= t('.title')
+
+  %div#events.min-w-full.divide-y.divide-gray-200.space-y-5
+    .overflow-x-auto
+      %table.daisy-table.daisy-table-zebra.daisy-table-pin-cols.daisy-table-pin-rows
+        %thead
+          %tr
+            %td= t('.actions')
+            %td= Event.human_attribute_name(:name)
+            %td.max-w-16= Event.human_attribute_name(:start_date)
+        %tbody
+          - @events.each do |event|
+            %tr{ id: dom_id(event) }
+              %td.max-w-32
+                %div{ class:"w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2" }
+                  = link_to event, class: "daisy-btn daisy-btn-primary daisy-btn-sm", title: t('.show') do
+                    %i.fa-regular.fa-file-lines
+                    = t('.show')
+                  = link_to edit_event_path(event), class: "daisy-btn daisy-btn-accent daisy-btn-sm", title: t('.edit') do
+                    %i.fa-regular.fa-edit
+                    = t('.edit')
+              %td.font-bold.min-w-80= event.name
+              %td.font-bold.max-w-16= l(event.start_date)

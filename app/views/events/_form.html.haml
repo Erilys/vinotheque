@@ -1,0 +1,62 @@
+= content_for :title, t('.title_tab')
+
+.w-full
+  .mb-8.flex.items-end.gap-3
+    = image_tag 'icons/flaticon-wine-shopping.png', class: 'w-20 h-20'
+    %h1.text-primary= title
+
+  = simple_form_for event do |f|
+    - if event.errors.any?
+      #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-md.mt-3
+        %h2= "#{pluralize(event.errors.count, "error")} prohibited this event from being saved:"
+        %ul.list-disc.ml-6
+          - event.errors.each do |error|
+            = error.full_message
+
+    .w-full.flex.gap-3.mb-6
+      .mb-3
+        %label.daisy-input.w-full
+          %span.daisy-label= Event.human_attribute_name(:start_date)
+          = f.date_field :start_date,
+            start_year: Date.today.year - 50,
+            end_year: Date.today.year + 1,
+            order: [:day, :month, :year],
+            value: event.start_date
+
+    .w-full.mb-6
+      = f.input :comment, as: :string
+
+    .mb-12.max-w-6xl
+      %h2.text-accent.mb-6= t('.the_bottles')
+      - transactions = @event.transactions.to_a
+      - transactions_index = transactions.length
+      - transactions << Transaction.new(source: event)
+      #transactions{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': transactions_index, 'data-nested-form-index-name-value': "INDEX_FOR_TRANSACTIONS"}
+        - transactions.each_with_index do |transaction, i|
+          - is_transaction_template = (i == transactions_index)
+          = f.simple_fields_for "transactions_attributes][#{is_transaction_template ? "INDEX_FOR_TRANSACTIONS" : i}", transaction do |ff|
+            %div{is_transaction_template ? {'data-nested-form-target': 'template', class: 'hidden'} : {'data-nested-form-item': ''}}
+              .w-full.flex.gap-3.items-center
+                = ff.input :id, label: false, as: :hidden
+                = ff.input :_destroy, label: false, as: :hidden
+                = ff.input :source_type, label: false, as: :hidden
+                = ff.input :wine_id, collection: Wine.all.sort, input_html: { class: 'min-w-32' }, wrapper_html: { class: 'w-2/4' }
+                = ff.input :quantity, input_html: { class: 'min-w-32' }, wrapper_html: { class: 'w-1/4' }
+                = ff.input :location_id, collection: Location.all.sort, wrapper_html: { class: 'w-1/4' }
+
+                = button_tag type: :button,
+                  class: 'text-accent mb-3',
+                  name: "#{f.object_name}[remove]",
+                  title: t('.delete_transaction'),
+                  data: { action: 'click->nested-form#removeItem' } do
+                  %i.fa-solid.fa-trash
+
+      = button_tag t('.add_drink'),
+        type: :button,
+        class: 'daisy-btn daisy-btn-accent',
+        data: { action: 'click->nested-form#addItem' }
+
+    = f.button :submit, t('submit'), class: 'daisy-btn daisy-btn-primary'
+    - if event.persisted?
+      = link_to t('.go_to_show'), event_path(event), class: "daisy-btn"
+    = link_to t('go_to_root'), wines_path, class: "daisy-btn"

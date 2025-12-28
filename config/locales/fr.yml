@@ -96,4 +96,12 @@ fr:
   false: Non
   go_to_root: Retourner à la vinothèque
   submit: Enregistrer
+  time:
+    am: am
+    formats:
+      default: "%d/%m/%Y  %H:%M:%S"
+      default_date: "%d/%m/%Y"
+      long: "%A %d %B %Y %Hh%M"
+      short: "%d %b %Hh%M"
+    pm: pm
   true: Oui

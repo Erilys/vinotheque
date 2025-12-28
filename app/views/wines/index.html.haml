@@ -5,7 +5,7 @@
 
   .mb-8.flex.justify-between.items-end
     .flex.items-end.gap-3
-      = image_tag 'icons/flaticon-wine.png', class: 'w-20 h-20'
+      = image_tag 'icons/flaticon-wine-grape.png', class: 'w-20 h-20'
       %h1.font-bold.text-primary= t('.title')
     = image_tag 'icons/flaticon-mouse.png', class: 'ml-3 w-10 h-10 rotate-12'
 
@@ -38,12 +38,21 @@
                     = link_to wine, class: "daisy-btn daisy-btn-primary daisy-btn-sm", title: t('.show') do
                       %i.fa-regular.fa-file-lines
                       = t('.show')
-                    = link_to edit_wine_path(wine), class: "daisy-btn daisy-btn-accent daisy-btn-sm", title: t('.edit') do
-                      %i.fa-regular.fa-edit
-                      = t('.edit')
-                    = link_to new_entry_path(wine_id: wine.id), class: "daisy-btn daisy-btn-accent daisy-btn-sm", title: t('.add_entry') do
-                      %i.fa-solid.fa-basket-shopping
-                      = t('.add_entry')
+                    .daisy-dropdown
+                      %div{ tabindex:"0", role:"button", class:"daisy-btn daisy-btn-sm daisy-btn-accent" }
+                        = t('.actions')
+                      %ul{ tabindex:"-1", class:"daisy-dropdown-content daisy-menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm" }
+                        %li
+                          = link_to edit_wine_path(wine), title: t('.edit') do
+                            %i.fa-regular.fa-edit
+                            = t('.edit')
+                          = link_to new_entry_path(wine_id: wine.id), title: t('.add_entry') do
+                            %i.fa-solid.fa-basket-shopping
+                            = t('.add_entry')
+                          = link_to new_event_path(wine_id: wine.id), title: t('.add_event') do
+                            %i.fa-solid.fa-champagne-glasses
+                            = t('.add_event')
+
                 %td.font-bold= wine.xl_id
                 %th.min-w-80= wine.name
                 %td= wine.year

@@ -1,0 +1,20 @@
+---
+fr:
+  events:
+    edit:
+      title: Modifier un évènement
+    form:
+      add_drink: Ajouter un vin
+      go_to_show: Retourner à la fiche de l'évènement
+      the_bottles: Les bouteilles
+    index:
+      actions: Actions
+      edit: Modifier
+      show: Fiche
+      title: Les évènements
+    new:
+      title: Nouvel évènement
+    show:
+      destroy: Supprimer
+      edit: Modifier
+      the_event: L'évènement

@@ -1,12 +1,16 @@
 .w-full.text-end.px-8
-  .flex.justify-end.gap-6
+  .flex.justify-end.gap-5
     .flex.justify-end.gap-1
       = link_to t('.all_wines'), wines_path, class: "daisy-btn daisy-btn-primary"
       = link_to new_wine_path, class: "daisy-btn daisy-btn-primary" do
         %i.fa-solid.fa-plus
     .flex.justify-end.gap-1
-      = link_to t('.all_entries'), entries_path, class: "daisy-btn daisy-btn-accent"
-      = link_to new_entry_path, class: "daisy-btn daisy-btn-accent" do
+      = link_to t('.all_entries'), entries_path, class: "daisy-btn daisy-btn-info"
+      = link_to new_entry_path, class: "daisy-btn daisy-btn-info" do
         %i.fa-solid.fa-plus
     .flex.justify-end.gap-1
-      = link_to t('.all_transactions'), transactions_path, class: "daisy-btn daisy-btn-info"
+      = link_to t('.all_events'), events_path, class: "daisy-btn daisy-btn-accent"
+      = link_to new_event_path, class: "daisy-btn daisy-btn-accent" do
+        %i.fa-solid.fa-plus
+    .flex.justify-end.gap-1
+      = link_to t('.all_transactions'), transactions_path, class: "daisy-btn daisy-btn-base"

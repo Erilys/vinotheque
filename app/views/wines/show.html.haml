@@ -29,16 +29,16 @@
 
   .flex.gap-16.items-top
     %div
-      %h2.mb-6.text-accent= Entry.human_attribute_name(:bottles)
-      %table.daisy-table.daisy-table-zebra.daisy-table-pin-cols.daisy-table-pin-rows.w-80
+      %h2.mb-6.text-accent= Wine.human_attribute_name(:transactions)
+      %table.daisy-table
         %thead
           %tr
-            %td= Transaction.human_attribute_name(:original_quantity)
+            %td.pl-0= Transaction.human_attribute_name(:quantity)
             %td= Transaction.human_attribute_name(:location)
         %tbody
           - @wine.transactions.each do |transaction|
             %tr
-              %td.font-semibold= transaction.quantity
+              %td.pl-0.font-semibold= transaction.quantity
               %td.font-semibold= transaction.location.name
 
     .flex-grow-1

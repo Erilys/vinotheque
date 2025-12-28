@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   end
   resources :entries
   resources :transactions, only: %i[index]
+  resources :events
 end

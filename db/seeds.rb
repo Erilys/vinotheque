@@ -31,8 +31,12 @@ Location.destroy_all
 ].each do |location_name|
   Location.create!(name: location_name)
 end
+first_location = Location.first
+last_location = Location.last
 
 Entry.destroy_all
+
+Transaction.destroy_all
 Wine.find_each do |wine|
   entry = Entry.new(
     wine:,
@@ -41,7 +45,17 @@ Wine.find_each do |wine|
     price_per_bottle_in_cents: rand(100...100000),
     purchase_date: Faker::Date.backward(days: 365)
   )
-  entry.transactions.build(location: Location.first, quantity: 3)
-  entry.transactions.build(location: Location.last, quantity: 2)
+  entry.transactions.build(location: first_location, quantity: 3)
+  entry.transactions.build(location: last_location, quantity: 2)
   entry.save!
 end
+
+Event.destroy_all
+event = Event.new(
+  start_date: Time.zone.today,
+  name: 'Christmas 2025',
+  comment: 'Merry Christmas !',
+  comment_wine: 'Good stuff'
+)
+event.transactions.build(location: first_location, wine: Wine.first, quantity: -2)
+event.save!
