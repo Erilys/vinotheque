@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_28_182116) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_28_204556) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -117,4 +117,33 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_182116) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+
+  create_view "stocks", materialized: true, sql_definition: <<-SQL
+      WITH inventory AS (
+           SELECT operations.wine_id,
+              sum(operations.quantity) AS quantity,
+              operations.location_id
+             FROM operations
+            GROUP BY operations.wine_id, operations.location_id
+          UNION
+           SELECT drinks.wine_id,
+              sum((drinks.quantity * '-1'::integer)) AS quantity,
+              drinks.location_id
+             FROM drinks
+            GROUP BY drinks.wine_id, drinks.location_id
+          ), temp_table AS (
+           SELECT inventory.wine_id,
+              sum(inventory.quantity) AS quantity,
+              inventory.location_id
+             FROM inventory
+            GROUP BY inventory.wine_id, inventory.location_id
+          )
+   SELECT temp_table.wine_id,
+      temp_table.quantity,
+      temp_table.location_id
+     FROM temp_table
+    WHERE (temp_table.quantity <> (0)::numeric);
+  SQL
+  add_index "stocks", ["wine_id"], name: "index_stocks_on_wine_id"
+
 end
