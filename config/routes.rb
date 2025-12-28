@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :wines do
     resources :pictures_attachments, only: %i[destroy]
   end
-  resources :entries
+  resources :purchases
   resources :operations, only: %i[index]
   resources :events
 end

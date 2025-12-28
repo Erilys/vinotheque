@@ -5,7 +5,7 @@ class Operation < ApplicationRecord
   # Scopes
 
   # Callbacks
-  before_validation :set_wine_from_entry, if: -> { source_type == 'Entry' }
+  before_validation :set_wine_from_purchase, if: -> { source_type == 'Purchase' }
 
   # Attr_accessor
   attribute :quantity, default: 1
@@ -21,7 +21,7 @@ class Operation < ApplicationRecord
   # Delegation
 
   # Methods
-  def set_wine_from_entry
+  def set_wine_from_purchase
     self.wine = source.wine
   end
 end

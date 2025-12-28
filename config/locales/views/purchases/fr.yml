@@ -1,20 +1,20 @@
 ---
 fr:
-  entries:
+  purchases:
     edit:
-      go_to_show: Retourner à l'entrée
-      title: Modifier une entrée
+      go_to_show: Retourner à l'achat
+      title: Modifier un achat
     form:
       add_locations: Ajouter un emplacement
       new_store: Nouveau magasin
     index:
       actions: Actions
       edit: Modifier
-      new_entry: Nouvelle entrée
+      new_purchase: Nouvel achat
       show: Voir
       title: Les achats
     new:
-      title: Nouvelle entrée (achat, cadeau...)
+      title: Nouvelle achat
     show:
       destroy: Supprimer
       details: Détails de l'achat

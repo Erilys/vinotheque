@@ -46,9 +46,9 @@
                           = link_to edit_wine_path(wine), title: t('.edit') do
                             %i.fa-regular.fa-edit
                             = t('.edit')
-                          = link_to new_entry_path(wine_id: wine.id), title: t('.add_entry') do
+                          = link_to new_purchase_path(wine_id: wine.id), title: t('.add_purchase') do
                             %i.fa-solid.fa-basket-shopping
-                            = t('.add_entry')
+                            = t('.add_purchase')
                           = link_to new_event_path(wine_id: wine.id), title: t('.add_event') do
                             %i.fa-solid.fa-champagne-glasses
                             = t('.add_event')

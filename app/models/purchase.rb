@@ -1,4 +1,4 @@
-class Entry < ApplicationRecord
+class Purchase < ApplicationRecord
   # Constants
 
   # Scopes

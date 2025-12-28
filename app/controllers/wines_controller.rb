@@ -2,7 +2,7 @@ class WinesController < ApplicationController
   before_action :set_wine, only: %i[ show edit update destroy ]
 
   def index
-    @wines = Wine.includes(:entries, :stocks, :drinks).order(:name, :year)
+    @wines = Wine.includes(:purchases, :stocks, :drinks).order(:name, :year)
   end
 
   def show

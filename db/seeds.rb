@@ -33,20 +33,20 @@ end
 first_location = Location.first
 last_location = Location.last
 
-Entry.destroy_all
+Purchase.destroy_all
 
 Operation.destroy_all
 Wine.find_each do |wine|
-  entry = Entry.new(
+  purchase = Purchase.new(
     wine:,
     store: Faker::Commerce.brand,
     town: 'Menton',
     price_per_bottle_in_cents: rand(100...100000),
     purchase_date: Faker::Date.backward(days: 365)
   )
-  entry.operations.build(location: first_location, quantity: 3)
-  entry.operations.build(location: last_location, quantity: 2)
-  entry.save!
+  purchase.operations.build(location: first_location, quantity: 3)
+  purchase.operations.build(location: last_location, quantity: 2)
+  purchase.save!
 end
 
 Event.destroy_all

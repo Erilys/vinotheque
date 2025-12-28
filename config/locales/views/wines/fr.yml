@@ -10,10 +10,10 @@ fr:
       confirm_destroy_picture: Êtes-vous sûr ? SUPPRESSION DÉFINITIVE
     index:
       actions: Actions
-      add_entry: Achat
+      add_purchase: Achat
       add_event: Évènement
       edit: Modifier
-      new_entry: Ajouter une entrée
+      new_purchase: Ajouter un achat
       new_wine: Ajouter un vin
       show: Fiche
       stock: Stock

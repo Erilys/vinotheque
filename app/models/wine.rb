@@ -12,7 +12,7 @@ class Wine < ApplicationRecord
   has_many_attached :front_label_pictures
   has_many_attached :back_label_pictures
 
-  has_many :entries
+  has_many :purchases
   has_many :drinks
   has_many :stocks
 

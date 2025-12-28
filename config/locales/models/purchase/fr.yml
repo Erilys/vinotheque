@@ -2,7 +2,7 @@
 fr:
   activerecord:
     attributes:
-      entry:
+      purchase:
         operations: Operations
         comment: Commentaire
         gift: Cadeau
@@ -14,10 +14,10 @@ fr:
         wine_id: Vin
     errors:
       models:
-        entry:
+        purchase:
           # attributes:
           #   old_password_confirmation:
           #     old_password_invalid: ne correspond pas à l'ancien mot de passe
     models:
-      entries: Entrées
-      entry: Entrée
+      purchases: Achats
+      purchase: Achat

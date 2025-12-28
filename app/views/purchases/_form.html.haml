@@ -5,23 +5,23 @@
     = image_tag 'icons/flaticon-wine-box.png', class: 'w-20 h-20'
     %h1.text-primary= title
 
-  = simple_form_for entry do |f|
-    - if entry.errors.any?
+  = simple_form_for purchase do |f|
+    - if purchase.errors.any?
       #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-md.mt-3
-        %h2= "#{pluralize(entry.errors.count, "error")} prohibited this entry from being saved:"
+        %h2= "#{pluralize(purchase.errors.count, "error")} prohibited this purchase from being saved:"
         %ul.list-disc.ml-6
-          - entry.errors.each do |error|
+          - purchase.errors.each do |error|
             = error.full_message
 
     .w-full.flex.gap-3.mb-6
       .mb-3
         %label.daisy-input.w-full
-          %span.daisy-label= Entry.human_attribute_name(:purchase_date)
+          %span.daisy-label= Purchase.human_attribute_name(:purchase_date)
           = f.date_field :purchase_date,
             start_year: Date.today.year - 50,
             end_year: Date.today.year + 1,
             order: [:day, :month, :year],
-            value: entry.purchase_date
+            value: purchase.purchase_date
 
     .w-full.flex.gap-3.mb-6
       = f.input :wine_id,
@@ -29,17 +29,17 @@
         wrapper_html: { class: 'w-1/2' }
 
     .w-full.flex.gap-3.mb-6
-      = f.input :store, collection: Entry.distinct(:store).order(:store).pluck(:store), wrapper_html: { class: 'w-1/4' }
-      = f.input :store, label: t('.new_store'), input_html: { name: 'entry[new_store]', value: nil }, wrapper_html: { class: 'w-1/4' }
+      = f.input :store, collection: Purchase.distinct(:store).order(:store).pluck(:store), wrapper_html: { class: 'w-1/4' }
+      = f.input :store, label: t('.new_store'), input_html: { name: 'purchase[new_store]', value: nil }, wrapper_html: { class: 'w-1/4' }
       = f.input :town, wrapper_html: { class: 'w-1/4' }
 
     .w-full.mb-6
       = f.input :comment, as: :string
 
-    %h2.text-accent.mb-6= Entry.human_attribute_name(:operation)
-    - operations = @entry.operations.to_a
+    %h2.text-accent.mb-6= Purchase.human_attribute_name(:operation)
+    - operations = @purchase.operations.to_a
     - operations_index = operations.length
-    - operations << Operation.new(source: entry)
+    - operations << Operation.new(source: purchase)
     #operations{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': operations_index, 'data-nested-form-index-name-value': "INDEX_FOR_OPERATIONS"}
       .flex.gap-9
         = button_tag t('.add_locations'),

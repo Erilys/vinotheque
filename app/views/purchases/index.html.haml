@@ -1,0 +1,35 @@
+.w-full
+  - if notice.present?
+    %p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-md.inline-block{ id: :notice }
+      = notice
+
+  .mb-8.flex.justify-between.items-end
+    .flex.items-end.gap-3
+      = image_tag 'icons/flaticon-wine-shopping.png', class: 'w-20 h-20'
+      %h1.font-bold.text-primary= t('.title')
+
+  %div#wines.min-w-full.divide-y.divide-gray-200.space-y-5
+    .overflow-x-auto
+      %table.daisy-table.daisy-table-zebra.daisy-table-pin-cols.daisy-table-pin-rows
+        %thead
+          %tr
+            %td= t('.actions')
+            %td= Purchase.human_attribute_name(:wine)
+            %td= Wine.human_attribute_name(:year)
+            %td= Purchase.human_attribute_name(:operations)
+            %td= Purchase.human_attribute_name(:purchase_date)
+            %td= Purchase.human_attribute_name(:store)
+            %td= Purchase.human_attribute_name(:town)
+        %tbody
+          - @purchases.each do |purchase|
+            %tr{ id: dom_id(purchase) }
+              %td
+                %div{ class:"w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2" }
+                  = link_to t('.show'), purchase, class: "daisy-btn daisy-btn-primary daisy-btn-sm"
+                  = link_to t('.edit'), edit_purchase_path(purchase), class: "daisy-btn daisy-btn-accent daisy-btn-sm"
+              %td.font-bold.min-w-80= purchase.wine.name
+              %td.font-bold= purchase.wine.year
+              %th.font-bold= purchase.operations.sum(&:quantity)
+              %td= purchase.purchase_date
+              %td= purchase.store
+              %td= purchase.town

@@ -9,7 +9,7 @@ fr:
         quantity: Nombre
         source_type: Source
         source_types:
-          'Entry': Entrée (achat, don)
+          'Purchase': Achat
           'Event': Évènement
         wine: Vin
         wine_id: Vin
