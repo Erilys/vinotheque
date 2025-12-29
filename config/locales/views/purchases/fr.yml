@@ -5,7 +5,7 @@ fr:
       go_to_show: Retourner à l'achat
       title: Modifier un achat
     form:
-      add_locations: Ajouter un emplacement
+      add_purchase_item: Ajouter une entrée
       new_store: Nouveau magasin
     index:
       actions: Actions

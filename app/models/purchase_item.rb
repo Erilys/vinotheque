@@ -1,5 +1,5 @@
 class PurchaseItem < ApplicationRecord
-  include OperationConcern
+  include StockMovementConcern
   # Constants
 
   # Scopes

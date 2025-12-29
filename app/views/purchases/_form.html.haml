@@ -40,7 +40,7 @@
     - purchase_items << PurchaseItem.new(source: purchase)
     #purchase_items{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': purchase_items_index, 'data-nested-form-index-name-value': "INDEX_FOR_PURCHASE_ITEMS"}
       .flex.gap-9
-        = button_tag t('.add_locations'),
+        = button_tag t('.add_purchase_item'),
           type: :button,
           class: 'daisy-btn daisy-btn-accent',
           data: { action: 'click->nested-form#addItem' }

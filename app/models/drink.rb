@@ -1,5 +1,5 @@
 class Drink < ApplicationRecord
-  include OperationConcern
+  include StockMovementConcern
   # Constants
 
   # Scopes

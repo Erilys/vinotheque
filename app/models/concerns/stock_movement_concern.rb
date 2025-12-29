@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module OperationConcern
+module StockMovementConcern
   extend ActiveSupport::Concern
 
   included do
