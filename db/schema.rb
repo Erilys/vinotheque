@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_29_170740) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_29_181845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,16 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_29_170740) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "discrepancies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "location_id", null: false
+    t.integer "quantity", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "wine_id", null: false
+    t.index ["location_id"], name: "index_discrepancies_on_location_id"
+    t.index ["wine_id"], name: "index_discrepancies_on_wine_id"
   end
 
   create_table "drinks", force: :cascade do |t|
@@ -118,6 +128,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_29_170740) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "discrepancies", "locations"
+  add_foreign_key "discrepancies", "wines"
 
   create_view "stocks", materialized: true, sql_definition: <<-SQL
       WITH inventory AS (
