@@ -28,7 +28,7 @@ Location.destroy_all
 %w[
   2A 2B 2C 2D 2E 2F 2G 2H A B C D E F G H I J K L M N S
 ].each do |location_name|
-  Location.create!(name: location_name)
+  Location.create!(name: location_name, slots: rand(16..20))
 end
 first_location = Location.first
 last_location = Location.last
