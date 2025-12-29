@@ -1,0 +1,103 @@
+%div{ data: { controller: 'search' }}
+  = form_with url: search_wines_search_path,
+    class: 'flex gap-4 mb-10',
+    data: { 'search-target': 'form' },
+    method: :get do |f|
+
+    %fieldset.daisy-fieldset.bg-base-100.border-base-300.rounded-box.w-48.border.p-4
+      %legend.daisy-fieldset-legend.px-2= Wine.human_attribute_name(:color)
+      - @colors.each do |color|
+        = label_tag '', class: 'ml-1 mb-2 daisy-label' do
+          = checkbox_tag 'search[color][]',
+            color,
+            checked: @selected_colors.include?(color),
+            disabled: @selected_colors.blank? && @wines.none? { |wine| wine.color == color },
+            class: 'daisy-checkbox daisy-checkbox-sm',
+            data: { action: 'search#submitForm' }
+          = enum_i18n(Wine, :color, color)
+
+    %fieldset.daisy-fieldset.bg-base-100.border-base-300.rounded-box.w-64.border.p-4
+      %legend.daisy-fieldset-legend.px-2= Wine.human_attribute_name(:variety)
+      - @varietys.each do |variety|
+        = label_tag '', class: 'ml-1 mb-2 daisy-label' do
+          = checkbox_tag 'search[variety][]',
+            variety,
+            checked: @selected_varietys.include?(variety),
+            disabled: @selected_varietys.blank? && @wines.none? { |wine| wine.variety == variety },
+            class: 'daisy-checkbox daisy-checkbox-sm',
+            data: { action: 'search#submitForm' }
+          = variety
+
+    %fieldset.daisy-fieldset.bg-base-100.border-base-300.rounded-box.w-32.border.p-4
+      %legend.daisy-fieldset-legend.px-2= Wine.human_attribute_name(:year)
+      - @years.each do |year|
+        = label_tag '', class: 'ml-1 mb-2 daisy-label' do
+          = checkbox_tag 'search[year][]',
+            year,
+            checked: @selected_years.include?(year),
+            disabled: @selected_years.blank? && @wines.none? { |wine| wine.year == year },
+            class: 'daisy-checkbox daisy-checkbox-sm',
+            data: { action: 'search#submitForm' }
+          = year
+
+    %fieldset.daisy-fieldset.bg-base-100.border-base-300.rounded-box.w-64.border.p-4
+      %legend.daisy-fieldset-legend.px-2= Wine.human_attribute_name(:name)
+      - @names.each_with_index do |name, index|
+        = label_tag '', class: 'ml-1 mb-2 daisy-label' do
+          = checkbox_tag "search[name][]",
+            name,
+            checked: @selected_names.include?(name),
+            disabled: @selected_names.blank? && @wines.none? { |wine| wine.name == name },
+            class: 'daisy-checkbox daisy-checkbox-sm',
+            data: { action: 'search#submitForm' }
+          = name
+
+    %fieldset.daisy-fieldset.bg-base-100.border-base-300.rounded-box.w-32.border.p-4
+      %legend.daisy-fieldset-legend.px-2= Drink.human_attribute_name(:location_id)
+      %ul
+        - @locations.each do |location|
+          %li
+            = label_tag '', class: 'ml-1 mb-2 daisy-label' do
+              = checkbox_tag 'search[location_id][]',
+                location.id,
+                checked: @selected_location_ids.include?(location.id),
+                disabled: @selected_location_ids.blank? && @wines.map(&:stocks).flatten.none? { |stock| stock.location_id == location.id },
+                class: 'daisy-checkbox daisy-checkbox-sm',
+                data: { action: 'search#submitForm' }
+              = location.name
+
+  %div#wines.min-w-full.divide-y.divide-gray-200.space-y-5
+    - if @wines.any?
+      .overflow-x-auto
+        %table.daisy-table.daisy-table-zebra.pb-32
+          %thead
+            %tr
+              %td= t('.actions')
+              %td= Wine.human_attribute_name(:xl_id)
+              %th= Wine.human_attribute_name(:name)
+              %td= Wine.human_attribute_name(:year)
+              %td= t('.stock')
+          %tbody
+            - @wines.index_by(&:id).each do |wine_id, wine|
+              %tr{ id: dom_id(wine) }
+                %td
+                  %div{ class:"w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2" }
+                    .daisy-dropdown
+                      %div{ tabindex:"0", role:"button", class:"daisy-btn daisy-btn-sm daisy-btn-accent" }
+                        = t('.actions')
+                      %ul{ tabindex:"-1", class:"daisy-dropdown-content daisy-menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm" }
+                        %li
+                          = link_to edit_wine_path(wine), title: t('.edit') do
+                            %i.fa-regular.fa-edit
+                            = t('.edit')
+                          = link_to new_purchase_path(wine_id: wine.id), title: t('.add_purchase') do
+                            %i.fa-solid.fa-basket-shopping
+                            = t('.add_purchase')
+                          = link_to new_event_path(wine_id: wine.id), title: t('.add_event') do
+                            %i.fa-solid.fa-champagne-glasses
+                            = t('.add_event')
+
+                %td.font-bold= wine.xl_id
+                %th.min-w-80= wine.name
+                %td= wine.year
+                %td= wine.stocks.sort_by{ it.location.name }.map{ "#{it.quantity.to_i} bouteille(s) en #{it.location.name}" }.join(' - ')

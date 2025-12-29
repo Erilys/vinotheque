@@ -2,6 +2,7 @@
   fr:
     layouts:
       navbar:
+        add: Ajouter...
         all_purchases: Achats
         all_events: Évènements
         all_locations: Emplacements
@@ -10,4 +11,5 @@
         new_location: Nouvel emplacement
         new_purchase: Nouvel achat
         new_wine: Nouveau vin
+        search_wines: Recherche
         title: La vinothèque
