@@ -1,14 +1,38 @@
-.w-full.text-end.px-8
-  .flex.justify-end.gap-5
-    .flex.justify-end.gap-1
-      = link_to t('.all_wines'), wines_path, class: "daisy-btn daisy-btn-primary"
-      = link_to new_wine_path, class: "daisy-btn daisy-btn-primary" do
-        %i.fa-solid.fa-plus
-    .flex.justify-end.gap-1
-      = link_to t('.all_purchases'), purchases_path, class: "daisy-btn daisy-btn-info"
-      = link_to new_purchase_path, class: "daisy-btn daisy-btn-info" do
-        %i.fa-solid.fa-plus
-    .flex.justify-end.gap-1
-      = link_to t('.all_events'), events_path, class: "daisy-btn daisy-btn-accent"
-      = link_to new_event_path, class: "daisy-btn daisy-btn-accent" do
-        %i.fa-solid.fa-plus
+.daisy-navbar.bg-base-100.shadow-sm.py-3
+  .daisy-navbar-start
+    .daisy-dropdown
+      %div{ tabindex:"0", role:"button", class:"daisy-btn daisy-btn-ghost lg:hidden" }
+        %svg{ xmlns:"http://www.w3.org/2000/svg", class:"h-5 w-5", fill:"none", viewBox:"0 0 24 24", stroke:"currentColor" }
+          %path{ 'stroke-linecap':"round", 'stroke-linejoin':"round", 'stroke-width':"2", d:"M4 6h16M4 12h8m-8 6h16" }
+      %ul{ tabindex:"-1", class: "daisy-menu daisy-menu-sm daisy-dropdown-content bg-base-100 rounded-box z-2 mt-3 w-52 p-2 shadow" }
+        %li= link_to t('.all_wines'), wines_path
+        %li= link_to t('.all_purchases'), purchases_path
+        %li= link_to t('.all_events'), events_path
+        %li= link_to t('.all_locations'), locations_path
+        %li
+          %a Ajouter...
+          %ul.p-2
+            %li= link_to 'Nouveau vin', new_wine_path
+            %li= link_to 'Nouvel achat', new_wine_path
+            %li= link_to 'Nouvel évènement', new_event_path
+            %li= link_to 'Nouvel emplacement', new_location_path
+    .flex.items-end.gap-3
+      = image_tag 'icons/flaticon-vineyard.png', class: 'w-14 h-14'
+      .text-2xl.mb-2.font-bold.text-primary= t('.title')
+
+  .daisy-navbar-center.hidden.lg:flex
+    %ul.daisy-menu.daisy-menu-horizontal.px-1.pb-0
+      %li.text-lg= link_to t('.all_wines'), wines_path
+      %li.text-lg= link_to t('.all_purchases'), purchases_path
+      %li.text-lg= link_to t('.all_events'), events_path
+      %li.text-lg= link_to t('.all_locations'), locations_path
+      %li.text-lg
+        %details
+          %summary Ajouter...
+          %ul.p-2.bg-base-100.w-40.z-2
+            %li= link_to 'Nouveau vin', new_wine_path
+            %li= link_to 'Nouvel achat', new_wine_path
+            %li= link_to 'Nouvel évènement', new_event_path
+            %li= link_to 'Nouvel emplacement', new_location_path
+  .daisy-navbar-end
+    %a.daisy-btn Button

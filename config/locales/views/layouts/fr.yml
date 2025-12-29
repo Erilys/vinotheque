@@ -5,6 +5,8 @@
         all_purchases: Les achats
         all_operations: Les transactions
         all_events: Les évènements
+        all_locations: Les emplacements
         all_wines: Les vins
         new_purchase: Ajouter un achat
         new_wine: Ajouter un vin
+        title: La vinothèque
