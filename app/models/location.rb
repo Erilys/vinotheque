@@ -8,6 +8,7 @@ class Location < ApplicationRecord
   # Attr_accessor
 
   # Associations
+  has_many :stocks
 
   # Validations
   normalizes :name, with: ->(string) { string.strip.presence }
@@ -18,4 +19,11 @@ class Location < ApplicationRecord
   # Delegation
 
   # Methods
+  def slots_taken
+    stocks.sum(&:quantity).to_i
+  end
+
+  def overflow?
+    slots_taken > slots
+  end
 end

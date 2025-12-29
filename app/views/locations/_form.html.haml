@@ -1,0 +1,19 @@
+.w-full
+  .mb-8.flex.items-end.gap-3
+    = image_tag 'icons/flaticon-bottle-rack.png', class: 'w-14 h-14'
+    %h1.text-primary= title
+
+  = simple_form_for location do |f|
+    - if location.errors.any?
+      #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-md.mt-3
+        %h2= "#{pluralize(location.errors.count, "error")} prohibited this location from being saved:"
+        %ul.list-disc.ml-6
+          - location.errors.each do |error|
+            = error.full_message
+
+    .w-full.mb-6
+      = f.input :name, as: :string
+      = f.input :slots
+
+    = f.button :submit, t('submit'), class: 'daisy-btn daisy-btn-primary'
+    = link_to t('cancel'), locations_path, class: "daisy-btn"

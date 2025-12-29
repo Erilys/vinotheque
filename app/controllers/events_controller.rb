@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    @event.purchase_items << @event.purchase_items.build(wine_id: params[:wine_id])
+    @event.drinks << @event.drinks.build(wine_id: params[:wine_id])
   end
 
   def edit

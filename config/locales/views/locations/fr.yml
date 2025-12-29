@@ -1,0 +1,23 @@
+---
+fr:
+  locations:
+    destroy:
+      unauthorized_destroy_due_to_stocks: La suppression n'est pas autorisé car il reste du vin à cet emplacement.
+    edit:
+      title: Modifier un emplacement
+    form:
+      cancel: Annuler
+    index:
+      actions: Actions
+      confirm_destroy: Confirmez-vous la suppression de l'emplacement %{name} ?
+      destroy: Supprimer
+      edit: Modifier
+      free_slots: Nombre d'emplacements disponibles
+      location_overflow: Il y a trop de bouteilles pour le nombre d'emplacements disponibles.
+      other_actions: Autres actions
+      show: Voir le stock
+      title: Les emplacements
+    new:
+      title: Ajouter un emplacement
+    show:
+      title: Stock - %{name}

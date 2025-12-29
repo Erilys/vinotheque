@@ -1,0 +1,8 @@
+---
+fr:
+  activerecord:
+    attributes:
+      location:
+        name: Nom
+        slots: Nombre d'emplacements
+        stocks: Stocks

@@ -1,0 +1,40 @@
+.w-full
+  - if notice.present?
+    %p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-md.inline-block{ id: :notice }
+      = notice
+
+  .mb-8.flex.justify-between.items-end
+    .flex.items-end.gap-3
+      = image_tag 'icons/flaticon-bottle-rack.png', class: 'w-14 h-14'
+      %h1.font-bold.text-primary= t('.title')
+
+  %div#locations.min-w-full.divide-y.divide-gray-200.max-w-lg
+    .overflow-x-auto
+      %table.daisy-table.daisy-table-zebra.mb-18
+        %thead
+          %tr
+            %td= t('.actions')
+            %td= Location.human_attribute_name(:name)
+            %td= t('.free_slots')
+        %tbody
+          - @locations.each do |location|
+            %tr{ id: dom_id(location) }
+              %td.max-w-28
+                %div{ class:"w-full sm:w-auto flex flex-col sm:flex-row space-x-2" }
+                  = link_to t('.show'), location, class: "daisy-btn daisy-btn-sm daisy-btn-accent"
+                  .daisy-dropdown
+                    %div{ tabindex:"0", role:"button", class:"daisy-btn daisy-btn-sm" }
+                      = t('.other_actions')
+                    %ul{ tabindex:"-1", class:"daisy-dropdown-content daisy-menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm" }
+                      %li
+                        = link_to edit_location_path(location), title: t('.edit') do
+                          %i.fa-regular.fa-edit
+                          = t('.edit')
+                        = button_to location, method: :delete, title: t('.destroy'), data: { turbo_confirm: t('.confirm_destroy', name: location.name) } do
+                          %i.fa-solid.fa-trash
+                          = t('.destroy')
+              %td.font-bold= location.name
+              %td{ class: "font-bold #{location.slots_taken < location.slots ? 'text-green-600' : 'text-error'} #{'flex gap-3 items-center' if location.overflow?}" }
+                %span= "#{location.slots_taken} / #{location.slots}"
+                - if location.overflow?
+                  = image_tag 'icons/flaticon-overflow.png', class: 'w-10 h-10', title: t('.location_overflow')
