@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :purchases
   resources :purchase_items, only: %i[index]
   resources :events
+  resources :locations
 end
