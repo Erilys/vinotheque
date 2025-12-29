@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_29_181845) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_29_194743) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -144,6 +144,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_29_181845) do
               drinks.location_id
              FROM drinks
             GROUP BY drinks.wine_id, drinks.location_id
+          UNION
+           SELECT discrepancies.wine_id,
+              sum(discrepancies.quantity) AS quantity,
+              discrepancies.location_id
+             FROM discrepancies
+            GROUP BY discrepancies.wine_id, discrepancies.location_id
           ), temp_table AS (
            SELECT inventory.wine_id,
               sum(inventory.quantity) AS quantity,

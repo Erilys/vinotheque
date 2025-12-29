@@ -20,4 +20,6 @@ fr:
     new:
       title: Ajouter un emplacement
     show:
+      declare_inventory_discrepancy: Déclarer un écart d'inventaire
+      inventory_mode: Mode inventaire
       title: Stock - %{name}

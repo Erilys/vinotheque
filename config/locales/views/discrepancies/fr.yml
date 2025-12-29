@@ -1,0 +1,6 @@
+---
+  fr:
+    discrepancies:
+      create:
+        error: Une erreur est survenue, l'écart n'a pas été enregistré.
+        success: L'écart d'inventaire a bien été enregistré.

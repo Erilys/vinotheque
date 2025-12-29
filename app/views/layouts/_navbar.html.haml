@@ -12,27 +12,27 @@
         %li
           %a Ajouter...
           %ul.p-2
-            %li= link_to 'Nouveau vin', new_wine_path
-            %li= link_to 'Nouvel achat', new_wine_path
-            %li= link_to 'Nouvel évènement', new_event_path
-            %li= link_to 'Nouvel emplacement', new_location_path
+            %li= link_to t('.new_wine'), new_wine_path
+            %li= link_to t('.new_purchase'), new_purchase_path
+            %li= link_to t('.new_event'), new_event_path
+            %li= link_to t('.new_location'), new_location_path
     .flex.items-end.gap-3
       = image_tag 'icons/flaticon-vineyard.png', class: 'w-14 h-14'
       .text-2xl.mb-2.font-bold.text-primary= t('.title')
 
   .daisy-navbar-center.hidden.lg:flex
     %ul.daisy-menu.daisy-menu-horizontal.px-1.pb-0
-      %li.text-lg= link_to t('.all_wines'), wines_path
-      %li.text-lg= link_to t('.all_purchases'), purchases_path
-      %li.text-lg= link_to t('.all_events'), events_path
-      %li.text-lg= link_to t('.all_locations'), locations_path
+      %li.font-semibold.text-lg= link_to t('.all_wines'), wines_path
+      %li.font-semibold.text-lg= link_to t('.all_purchases'), purchases_path
+      %li.font-semibold.text-lg= link_to t('.all_events'), events_path
+      %li.font-semibold.text-lg= link_to t('.all_locations'), locations_path
       %li.text-lg
         %details
-          %summary Ajouter...
-          %ul.p-2.bg-base-100.w-40.z-2
-            %li= link_to 'Nouveau vin', new_wine_path
-            %li= link_to 'Nouvel achat', new_wine_path
-            %li= link_to 'Nouvel évènement', new_event_path
-            %li= link_to 'Nouvel emplacement', new_location_path
+          %summary.font-semibold Ajouter...
+          %ul.p-2.bg-base-100.w-58.z-2
+            %li= link_to t('.new_wine'), new_wine_path
+            %li= link_to t('.new_purchase'), new_purchase_path
+            %li= link_to t('.new_event'), new_event_path
+            %li= link_to t('.new_location'), new_location_path
   .daisy-navbar-end
     %a.daisy-btn Button

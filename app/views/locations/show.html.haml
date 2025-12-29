@@ -8,14 +8,32 @@
       = image_tag 'icons/flaticon-bottle-rack.png', class: 'w-14 h-14'
       %h1.font-bold.text-primary= t('.title', name: @location.name)
 
+    .daisy-stats.daisy-shadow
+      .daisy-stat
+        .daisy-stat-title= Location.human_attribute_name(:slots)
+        .daisy-stat-value.text-info= "#{@location.slots_taken} / #{@location.slots}"
+
   %div#locations.min-w-full.divide-y.divide-gray-200.space-y-5.max-w-lg
     .overflow-x-auto
-      %table.daisy-table.daisy-table-zebra.daisy-table-pin-cols.daisy-table-pin-rows
+      %table.daisy-table.daisy-table-zebra
         %thead
           %tr
             %td= Location.human_attribute_name(:name)
             %td= t('.quantity')
+            %td= t('.inventory_mode')
           - @stocks.each do |stock|
             %tr
               %td.font-bold= stock.wine.name_and_year
               %td.font-bold= stock.quantity.to_i
+              %td.max-w-28
+                .daisy-dropdown
+                  %div{ tabindex:"0", role:"button", class:"daisy-btn daisy-btn-sm" }
+                    = t('.declare_inventory_discrepancy')
+                  %ul{ tabindex:"-1", class:"daisy-dropdown-content daisy-menu bg-base-100 rounded-box z-100 w-52 p-2 shadow-sm" }
+                    - ['+1', '+2', '+3', '-1', '-2', '-3'].each do |quantity|
+                      %li.w-42
+                        = form_for Discrepancy.new do |f|
+                          = f.hidden_field :quantity, value: quantity
+                          = f.hidden_field :wine_id, value: stock.wine_id
+                          = f.hidden_field :location_id, value: @location.id
+                          = f.submit quantity.to_s, class: 'w-42 text-left cursor-pointer'

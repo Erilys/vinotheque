@@ -2,11 +2,12 @@
   fr:
     layouts:
       navbar:
-        all_purchases: Les achats
-        all_operations: Les transactions
-        all_events: Les évènements
-        all_locations: Les emplacements
-        all_wines: Les vins
-        new_purchase: Ajouter un achat
-        new_wine: Ajouter un vin
+        all_purchases: Achats
+        all_events: Évènements
+        all_locations: Emplacements
+        all_wines: Vins
+        new_event: Nouvel évènement
+        new_location: Nouvel emplacement
+        new_purchase: Nouvel achat
+        new_wine: Nouveau vin
         title: La vinothèque

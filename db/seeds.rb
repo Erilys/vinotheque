@@ -4,6 +4,7 @@
 
 require 'faker'
 
+Discrepancy.destroy_all
 Wine.destroy_all
 
 [
@@ -74,3 +75,5 @@ drink = event.drinks.build(
   location: last_location, quantity: 2
 )
 event.save!
+
+Discrepancy.create!(location: first_location, wine: Wine.first, quantity: -1)

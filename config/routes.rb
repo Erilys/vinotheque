@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   resources :purchase_items, only: %i[index]
   resources :events
   resources :locations
+  resources :discrepancies, only: %i[create]
 end
