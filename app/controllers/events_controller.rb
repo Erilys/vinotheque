@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :set_wine, only: %i[ show edit update destroy ]
 
   def index
-    @events = Event.includes(:operations).order(start_date: :desc)
+    @events = Event.includes(:drinks).order(start_date: :desc)
   end
 
   def show
@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    @event.operations << @event.operations.build(wine_id: params[:wine_id])
+    @event.purchase_items << @event.purchase_items.build(wine_id: params[:wine_id])
   end
 
   def edit
@@ -52,9 +52,9 @@ class EventsController < ApplicationController
   end
 
   def attach_pictures
-  # params[:event][:operations_attributes].each do |operation_attribute|
-  #   return if operation_attribute[:pictures].blank?
+  # params[:event][:purchase_items_attributes].each do |purchase_item_attribute|
+  #   return if purchase_item_attribute[:pictures].blank?
 
-  #   @event.pictures.attach(operation_attribute[:pictures])
+  #   @event.pictures.attach(purchase_item_attribute[:pictures])
   end
 end

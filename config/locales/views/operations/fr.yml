@@ -1,6 +1,6 @@
 ---
 fr:
-  operations:
+  purchase_items:
     index:
       actions: Actions
       title: Les transactions

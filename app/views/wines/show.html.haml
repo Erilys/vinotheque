@@ -33,8 +33,8 @@
       %table.daisy-table
         %thead
           %tr
-            %td.pl-0= Operation.human_attribute_name(:quantity)
-            %td= Operation.human_attribute_name(:location)
+            %td.pl-0= PurchaseItem.human_attribute_name(:quantity)
+            %td= PurchaseItem.human_attribute_name(:location)
         %tbody
           - @wine.stocks.each do |stock|
             %tr

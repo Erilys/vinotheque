@@ -1,5 +1,3 @@
-= content_for :title, t('.title_tab')
-
 .w-full
   .mb-8.flex.items-end.gap-3
     = image_tag 'icons/flaticon-wine-box.png', class: 'w-20 h-20'
@@ -36,11 +34,11 @@
     .w-full.mb-6
       = f.input :comment, as: :string
 
-    %h2.text-accent.mb-6= Purchase.human_attribute_name(:operation)
-    - operations = @purchase.operations.to_a
-    - operations_index = operations.length
-    - operations << Operation.new(source: purchase)
-    #operations{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': operations_index, 'data-nested-form-index-name-value': "INDEX_FOR_OPERATIONS"}
+    %h2.text-accent.mb-6= Purchase.human_attribute_name(:purchase_items)
+    - purchase_items = @purchase.purchase_items.to_a
+    - purchase_items_index = purchase_items.length
+    - purchase_items << PurchaseItem.new(source: purchase)
+    #purchase_items{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': purchase_items_index, 'data-nested-form-index-name-value': "INDEX_FOR_PURCHASE_ITEMS"}
       .flex.gap-9
         = button_tag t('.add_locations'),
           type: :button,
@@ -48,10 +46,10 @@
           data: { action: 'click->nested-form#addItem' }
 
         %div
-          - operations.each_with_index do |operation, i|
-            - is_operation_template = (i == operations_index)
-            = f.simple_fields_for "operations_attributes][#{is_operation_template ? "INDEX_FOR_OPERATIONS" : i}", operation do |ff|
-              %div{is_operation_template ? {'data-nested-form-target': 'template', class: 'hidden'} : {'data-nested-form-item': ''}}
+          - purchase_items.each_with_index do |purchase_item, i|
+            - is_purchase_item_template = (i == purchase_items_index)
+            = f.simple_fields_for "purchase_items_attributes][#{is_purchase_item_template ? "INDEX_FOR_PURCHASE_ITEMS" : i}", purchase_item do |ff|
+              %div{is_purchase_item_template ? {'data-nested-form-target': 'template', class: 'hidden'} : {'data-nested-form-item': ''}}
                 .w-full.flex.gap-3.items-center
                   = ff.input :id, label: false, as: :hidden
                   = ff.input :_destroy, label: false, as: :hidden
@@ -62,7 +60,7 @@
                   = button_tag type: :button,
                     class: 'text-accent mb-3',
                     name: "#{f.object_name}[remove]",
-                    title: t('.delete_operation'),
+                    title: t('.delete_purchase_item'),
                     data: { action: 'click->nested-form#removeItem' } do
                     %i.fa-solid.fa-trash
 

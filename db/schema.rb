@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_28_204556) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_29_162043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -72,7 +72,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_204556) do
     t.index ["name"], name: "index_locations_on_name", unique: true
   end
 
-  create_table "operations", force: :cascade do |t|
+  create_table "purchase_items", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "location_id"
     t.integer "quantity"
@@ -80,9 +80,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_204556) do
     t.string "source_type"
     t.datetime "updated_at", null: false
     t.bigint "wine_id", null: false
-    t.index ["location_id"], name: "index_operations_on_location_id"
-    t.index ["source_id"], name: "index_operations_on_source_id"
-    t.index ["wine_id"], name: "index_operations_on_wine_id"
+    t.index ["location_id"], name: "index_purchase_items_on_location_id"
+    t.index ["source_id"], name: "index_purchase_items_on_source_id"
+    t.index ["wine_id"], name: "index_purchase_items_on_wine_id"
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -120,11 +120,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_204556) do
 
   create_view "stocks", materialized: true, sql_definition: <<-SQL
       WITH inventory AS (
-           SELECT operations.wine_id,
-              sum(operations.quantity) AS quantity,
-              operations.location_id
-             FROM operations
-            GROUP BY operations.wine_id, operations.location_id
+           SELECT purchase_items.wine_id,
+              sum(purchase_items.quantity) AS quantity,
+              purchase_items.location_id
+             FROM purchase_items
+            GROUP BY purchase_items.wine_id, purchase_items.location_id
           UNION
            SELECT drinks.wine_id,
               sum((drinks.quantity * '-1'::integer)) AS quantity,

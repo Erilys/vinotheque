@@ -18,7 +18,7 @@ fr:
         organic: Biologique
         ticket: Ticket
         titration: Titrage (%)
-        operations: Bouteilles
+        purchase_items: Bouteilles
         year: Année
         variety: Variété
         volume: Volume (cl)

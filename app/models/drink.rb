@@ -14,7 +14,7 @@ class Drink < ApplicationRecord
   has_many_attached :pictures
 
   # Validations
-  # validates :operation, presence: true
+  # validates :purchase_item, presence: true
 
   # Delegation
 

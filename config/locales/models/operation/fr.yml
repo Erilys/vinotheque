@@ -2,7 +2,7 @@
 fr:
   activerecord:
     attributes:
-      operation:
+      purchase_item:
         created_at: Date
         location: Emplacement
         location_id: Emplacement

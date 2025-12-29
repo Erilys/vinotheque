@@ -14,7 +14,7 @@ fr:
       show: Voir
       title: Les achats
     new:
-      title: Nouvelle achat
+      title: Nouvel achat
     show:
       destroy: Supprimer
       details: Détails de l'achat

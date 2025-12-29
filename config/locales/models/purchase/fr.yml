@@ -3,7 +3,7 @@ fr:
   activerecord:
     attributes:
       purchase:
-        operations: Operations
+        purchase_items: Entrées
         comment: Commentaire
         gift: Cadeau
         price_per_bottle_in_cents: Prix d'une bouteille en centimes

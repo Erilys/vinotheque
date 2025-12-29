@@ -16,6 +16,6 @@ Rails.application.routes.draw do
     resources :pictures_attachments, only: %i[destroy]
   end
   resources :purchases
-  resources :operations, only: %i[index]
+  resources :purchase_items, only: %i[index]
   resources :events
 end

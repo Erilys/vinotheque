@@ -11,13 +11,13 @@ class Purchase < ApplicationRecord
   # Associations
   belongs_to :wine
 
-  has_many :operations, as: :source
-  accepts_nested_attributes_for :operations, allow_destroy: true
+  has_many :purchase_items, as: :source
+  accepts_nested_attributes_for :purchase_items, allow_destroy: true
 
   # Validations
   normalizes :store, :town, with: ->(string) { string.strip.presence }
 
-  validates :operations, presence: true
+  validates :purchase_items, presence: true
 
   # Delegation
 

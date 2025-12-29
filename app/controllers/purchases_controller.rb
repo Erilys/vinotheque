@@ -2,7 +2,7 @@ class PurchasesController < ApplicationController
   before_action :set_purchase, only: %i[ show edit update destroy ]
 
   def index
-    @purchases = Purchase.includes(:wine, :operations).order(purchase_date: :desc)
+    @purchases = Purchase.includes(:wine, :purchase_items).order(purchase_date: :desc)
   end
 
   def show
@@ -10,7 +10,7 @@ class PurchasesController < ApplicationController
 
   def new
     @purchase = Purchase.new
-    @purchase.operations << @purchase.operations.build
+    @purchase.purchase_items << @purchase.purchase_items.build
     @purchase.wine_id = params.fetch(:wine_id, nil)
   end
 
@@ -47,7 +47,7 @@ class PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params.expect(purchase: [ :quantity, :wine_id, :comment, :price_per_bottle_in_cents, :gift, :store, :new_store, :town, { operations_attributes: [%i[_destroy id location_id quantity]] } ]).tap do |parameters|
+    params.expect(purchase: [ :quantity, :wine_id, :comment, :price_per_bottle_in_cents, :gift, :store, :new_store, :town, { purchase_items_attributes: [%i[_destroy id location_id quantity]] } ]).tap do |parameters|
       parameters[:store] = parameters[:new_store] if parameters[:new_store].presence
       parameters.delete :new_store
     end

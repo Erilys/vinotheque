@@ -2,7 +2,7 @@
 
 .w-full
   .flex.justify-between
-    %h1.text-primary= t('.summary', count: @purchase.operations.map(&:quantity).sum, wine_name: @purchase.wine.name)
+    %h1.text-primary= t('.summary', count: @purchase.purchase_items.map(&:quantity).sum, wine_name: @purchase.wine.name)
 
     .daisy-stats.shadow
       .daisy-stat
@@ -13,17 +13,17 @@
 
   .flex.gap-16.items-top
     %div
-      %h2.mb-6.text-accent= Purchase.human_attribute_name(:operations)
+      %h2.mb-6.text-accent= Purchase.human_attribute_name(:purchase_items)
       %table.daisy-table
         %thead
           %tr
-            %td.pl-0= Operation.human_attribute_name(:quantity)
-            %td= Operation.human_attribute_name(:location)
+            %td.pl-0= PurchaseItem.human_attribute_name(:quantity)
+            %td= PurchaseItem.human_attribute_name(:location)
         %tbody
-          - @purchase.operations.each do |operation|
+          - @purchase.purchase_items.each do |purchase_item|
             %tr
-              %td.pl-0.font-bold= operation.quantity
-              %td.font-bold= operation.location.name
+              %td.pl-0.font-bold= purchase_item.quantity
+              %td.font-bold= purchase_item.location.name
 
     .flex-grow-1
       %h2.mb-6.text-accent= t('.details')

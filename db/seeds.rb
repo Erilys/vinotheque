@@ -35,7 +35,7 @@ last_location = Location.last
 
 Purchase.destroy_all
 
-Operation.destroy_all
+PurchaseItem.destroy_all
 Wine.find_each do |wine|
   purchase = Purchase.new(
     wine:,
@@ -44,8 +44,8 @@ Wine.find_each do |wine|
     price_per_bottle_in_cents: rand(100...100000),
     purchase_date: Faker::Date.backward(days: 365)
   )
-  purchase.operations.build(location: first_location, quantity: 3)
-  purchase.operations.build(location: last_location, quantity: 2)
+  purchase.purchase_items.build(location: first_location, quantity: 3)
+  purchase.purchase_items.build(location: last_location, quantity: 2)
   purchase.save!
 end
 

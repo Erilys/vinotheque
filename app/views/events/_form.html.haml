@@ -31,10 +31,10 @@
       - drinks = @event.drinks.to_a
       - drinks_index = drinks.length
       - drinks << Drink.new(event:)
-      #drinks{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': drinks_index, 'data-nested-form-index-name-value': "INDEX_FOR_OPERATIONS"}
+      #drinks{'data-controller': 'nested-form', 'data-nested-form-origin-index-value': drinks_index, 'data-nested-form-index-name-value': "INDEX_FOR_PURCHASE_ITEMS"}
         - drinks.each_with_index do |drink, i|
           - is_drink_template = (i == drinks_index)
-          = f.simple_fields_for "drinks_attributes][#{is_drink_template ? "INDEX_FOR_OPERATIONS" : i}", drink do |ff|
+          = f.simple_fields_for "drinks_attributes][#{is_drink_template ? "INDEX_FOR_PURCHASE_ITEMS" : i}", drink do |ff|
             .w-full.flex.gap-12.items-center.mb-12{is_drink_template ? {'data-nested-form-target': 'template', class: 'hidden'} : {'data-nested-form-item': ''}}
               %div.flex-grow-1
                 .w-full.flex.gap-3.items-center
